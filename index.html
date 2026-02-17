@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --mid: #555555;
+      --light: #aaaaaa;
+      --accent: #c8a96e;
+      --bg: #ffffff;
+      --border: #e8e8e8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 2rem;
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--black); }
+    nav a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+    /* ── HERO ── */
+    header {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3.5rem;
+    }
+
+    .profile-pic {
+      flex-shrink: 0;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--border);
+      /* Placeholder gradient until you swap in your photo */
+      background: linear-gradient(135deg, #e8e0d5 0%, #d4c9b8 100%);
+    }
+
+    .hero-text h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--black);
+    }
+
+    .hero-text .tagline {
+      margin-top: 0.6rem;
+      font-size: 1rem;
+      color: var(--mid);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.4rem;
+    }
+
+    .hero-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 1px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .hero-links a:hover { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── ABOUT SECTION ── */
+    section {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+
+    section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: var(--black);
+    }
+
+    section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    section p a {
+      color: var(--black);
+      font-weight: 500;
+      border-bottom: 1px solid var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    section p a:hover { color: var(--accent); }
+
+    /* ── SUBPAGE CARDS ── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      /* Placeholder colour blocks – swap for real images */
+      background: linear-gradient(135deg, #f0ebe3 0%, #e2d9cc 100%);
+    }
+
+    .card-thumb.blue   { background: linear-gradient(135deg, #dde8f0 0%, #c5d8e8 100%); }
+    .card-thumb.green  { background: linear-gradient(135deg, #dff0e8 0%, #c5e0d2 100%); }
+    .card-thumb.warm   { background: linear-gradient(135deg, #f0e8dd 0%, #e0d0c0 100%); }
+
+    .card-body {
+      padding: 1rem 1.1rem 1.2rem;
+    }
+
+    .card-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-body p {
+      font-size: 0.82rem;
+      color: var(--mid);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 580px) {
+      nav { padding: 1.2rem 1.5rem; gap: 1.2rem; }
+      header { flex-direction: column; align-items: flex-start; padding: 3rem 1.5rem 2.5rem; gap: 1.5rem; }
+      section { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="research.html">Research</a>
+    <a href="visualarts.html">Visual Arts</a>
+    <a href="internet.html">Internet</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <!-- ── HEADER / PROFILE ── -->
+  <header>
+    <!--
+      Replace the <div> below with an <img> tag once you have your photo:
+      <img src="profile.jpg" alt="Your Name" class="profile-pic" />
+    -->
+    <div class="profile-pic" role="img" aria-label="Profile picture placeholder"></div>
+
+    <div class="hero-text">
+      <h1>Your Name</h1>
+      <p class="tagline">
+        A short line about who you are — designer, developer, writer,
+        or whatever describes you best.
+      </p>
+      <div class="hero-links">
+        <a href="/cdn-cgi/l/email-protection#b9c0d6ccf9dcc1d8d4c9d5dc97dad6d4">Email</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        <a href="resume.pdf" target="_blank" rel="noopener">Résumé ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="divider"></div>
+
+  <!-- ── BIO SECTION ── -->
+  <section>
+    <h2>About Me</h2>
+    <p>
+      Write a short paragraph introducing yourself here. Tell visitors what you do,
+      what you're passionate about, and what makes you interesting. Keep it
+      conversational — this is your chance to make a first impression.
+    </p>
+    <p>
+      You can add more paragraphs as needed, and include
+      <a href="https://example.com" target="_blank" rel="noopener">links to relevant places</a>
+      or projects throughout your text naturally.
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── SUBPAGES / CARDS ── -->
+  <section>
+    <h2>Explore</h2>
+
+    <div class="cards">
+
+      <!-- Card 1 – Scientific Research -->
+      <a href="research.html" class="card gif-card">
+        <div class="card-thumb-gif">
+          <img src="magnifier.gif" alt="Rotating magnifying glass" class="card-gif" />
+        </div>
+        <div class="card-body">
+          <h3>Scientific Research</h3>
+          <p>Investigations, findings, and curiosities.</p>
+        </div>
+      </a>
+
+      <!-- Card 2 – Visual Arts -->
+      <a href="visualarts.html" class="card gif-card">
+        <div class="card-thumb-gif">
+          <img src="eyeball.gif" alt="Blinking eye" class="card-gif" />
+        </div>
+        <div class="card-body">
+          <h3>Visual Arts</h3>
+          <p>Work, experiments, and things I've made.</p>
+        </div>
+      </a>
+
+      <!-- Card 3 – Contact -->
+      <a href="contact.html" class="card gif-card">
+        <div class="card-thumb-gif">
+          <img src="pigeon.gif" alt="Carrier pigeon with letter" class="card-gif" />
+        </div>
+        <div class="card-body">
+          <h3>Contact</h3>
+          <p>Send a message — I'd love to hear from you.</p>
+        </div>
+      </a>
+
+      <!-- Card 4 – Internet Facet -->
+      <a href="internet.html" class="card gif-card">
+        <div class="card-thumb-gif">
+          <img src="internet_candle.gif" alt="Flickering blue candle" class="card-gif" />
+        </div>
+        <div class="card-body">
+          <h3>Internet Facet</h3>
+          <p>My corner of the web — links, finds, oddities.</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <style>
+    .card-thumb-gif {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #f5f2ee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .card-gif {
+      image-rendering: pixelated;
+      height: 80%;
+      width: auto;
+      max-height: 120px;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+    }
+    .gif-card:hover .card-gif {
+      transform: scale(1.1);
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2));
+    }
+  </style>
+
+  <div class="divider"></div>
+
+  <!-- ── CANDLE SECTION ── -->
+  <section style="text-align:center; padding-bottom: 4rem;">
+    <a href="candleroom.html" class="candle-link" title="Enter the candle room">
+      <img src="candle.gif" alt="A flickering pixel candle — click to enter" class="candle-gif" />
+      <p class="candle-label">enter</p>
+    </a>
+  </section>
+
+  <style>
+    .candle-link {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+    .candle-gif {
+      image-rendering: pixelated;
+      width: 120px;
+      height: auto;
+      transition: transform 0.3s ease, filter 0.3s ease;
+      filter: drop-shadow(0 0 14px rgba(255,180,50,0.45));
+    }
+    .candle-link:hover .candle-gif {
+      transform: scale(1.08);
+      filter: drop-shadow(0 0 28px rgba(255,160,30,0.75));
+    }
+    .candle-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.25em;
+      text-transform: lowercase;
+      color: var(--light);
+      transition: color 0.3s;
+    }
+    .candle-link:hover .candle-label {
+      color: var(--accent);
+    }
+  </style>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    &copy; 2026 Your Name &mdash; All rights 

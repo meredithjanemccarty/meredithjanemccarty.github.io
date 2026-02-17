@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Internet Facet — Your Name</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080c14; --text: #c8d8e8; --dim: #607080;
+      --accent: #4ab8e8; --border: rgba(100,160,210,0.15);
+      --glow: rgba(60,180,255,0.15);
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background: radial-gradient(ellipse at center, transparent 20%, rgba(0,0,0,0.75) 100%);
+      pointer-events: none; z-index: 0;
+    }
+    nav {
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 3rem; position: relative; z-index: 10;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8,12,20,0.8); backdrop-filter: blur(8px);
+    }
+    nav a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--dim); transition: color 0.25s; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav .back::before { content: '← '; }
+    nav .nav-links { display: flex; gap: 2rem; }
+
+    main {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 5rem 2rem 4rem;
+      max-width: 720px; width: 100%;
+    }
+
+    .glow-ring {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(60,180,255,0.2) 0%, transparent 70%);
+      display: flex; align-items: center; justify-content: center;
+      animation: breathe 4s ease-in-out infinite;
+      margin-bottom: 2.5rem;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.12); opacity: 0.7; }
+    }
+    .candle-img { image-rendering: pixelated; width: 120px; height: auto; filter: drop-shadow(0 0 20px rgba(60,180,255,0.65)); }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; font-style: italic;
+      color: var(--text); margin-bottom: 0.8rem;
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .subtitle {
+      font-size: 0.9rem; color: var(--dim); letter-spacing: 0.06em; line-height: 1.9;
+      margin-bottom: 3rem; max-width: 500px;
+      opacity: 0; animation: fadeUp 1s ease 0.55s forwards;
+    }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+    .content {
+      width: 100%; border-top: 1px solid var(--border);
+      padding-top: 2.5rem; text-align: left;
+      opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
+    }
+    .content h2 {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.4rem;
+      font-weight: 600; color: var(--text); margin-bottom: 1rem;
+    }
+    .content p { font-size: 0.95rem; line-height: 1.9; color: #90a8bc; font-weight: 300; margin-bottom: 1rem; }
+    .content p a { color: var(--accent); text-decoration: none; border-bottom: 1px solid rgba(74,184,232,0.3); transition: border-color 0.2s; }
+    .content p a:hover { border-color: var(--accent); }
+
+    /* Link list */
+    .link-list { list-style: none; margin-top: 1rem; display: flex; flex-direction: column; gap: 0.6rem; }
+    .link-list li a {
+      display: flex; align-items: center; gap: 0.8rem;
+      text-decoration: none; color: #90a8bc; font-size: 0.9rem;
+      padding: 0.6rem 0.8rem;
+      border: 1px solid var(--border); border-radius: 4px;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .link-list li a:hover { border-color: var(--accent); color: var(--accent); background: rgba(60,180,255,0.05); }
+    .link-list li a::before { content: '→'; opacity: 0.5; font-size: 0.8rem; }
+
+    footer { position: relative; z-index: 1; margin-top: auto; padding: 2rem; font-size: 0.78rem; color: rgba(96,112,128,0.5); letter-spacing: 0.04em; }
+    @media (max-width: 580px) { nav { padding: 1.2rem 1.5rem; } nav .nav-links { gap: 1rem; } main { padding: 3rem 1.5rem; } }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="back">Home</a>
+    <div class="nav-links">
+      <a href="research.html">Research</a>
+      <a href="visualarts.html">Visual Arts</a>
+      <a href="internet.html" class="active">Internet</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="glow-ring">
+      <img src="internet_candle.gif" alt="Flickering blue pixel candle" class="candle-img" />
+    </div>
+
+    <h1>Internet Facet</h1>
+    <p class="subtitle">
+      This is my corner of the web. Odd links, things I return to, 
+      dispatches from the digital dark.
+    </p>
+
+    <div class="content">
+      <h2>What this is</h2>
+      <p>
+        Fill this page with anything that represents how you move through the internet — 
+        bookmarks, favourite sites, rabbit holes, tools you keep open, 
+        things you want people to find. Think of it as a <a href="#">digital commonplace book</a>.
+      </p>
+
+      <h2 style="margin-top:2rem;">Links worth keeping</h2>
+      <ul class="link-list">
+        <li><a href="#">Something interesting you found</a></li>
+        <li><a href="#">A tool you use constantly</a></li>
+        <li><a href="#">An archive or resource you love</a></li>
+        <li><a href="#">Something impossible to explain but worth seeing</a></li>
+        <li><a href="#">A website that feels like a place</a></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>&copy; 2026 Your Name</footer>
+</body>
+</html>
