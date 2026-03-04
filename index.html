@@ -14,9 +14,19 @@
       --mid: #555555;
       --light: #aaaaaa;
       --accent: #c8a96e;
-      --bg: #ebe9e6;
+      --bg: #dfe3e0; /* FIX: muted sage-green, less bright/gray. Change to one of the options below if preferred. */
       --border: #e8e8e8;
     }
+
+    /*
+      ── BACKGROUND COLOR OPTIONS ──
+      Option A (current): muted sage green   → #dfe3e0
+      Option B: dusty rose                   → #e8ddd8
+      Option C: warm slate blue              → #d8dde3
+      Option D: antique parchment            → #e6e0d4
+      Option E: soft terracotta              → #e3dbd5
+      To switch, change --bg above.
+    */
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -63,6 +73,7 @@
       padding: 5rem 2rem 3.5rem;
     }
 
+    /* FIX 1: profile-pic is now purely a CSS class — no stray <img> tag inside it */
     .profile-pic {
       flex-shrink: 0;
       width: 140px;
@@ -70,7 +81,6 @@
       border-radius: 50%;
       object-fit: cover;
       border: 3px solid var(--border);
-      <img src="profile.png" alt="ProfileUriellu" class="profile-pic" />;
     }
 
     .hero-text h1 {
@@ -91,20 +101,22 @@
       max-width: 480px;
     }
 
+    /* FIX 3: hero links bigger, full width to match the h1 above */
     .hero-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.2rem;
       margin-top: 1.4rem;
+      width: 100%;
     }
 
     .hero-links a {
-      font-size: 0.85rem;
+      font-size: 1.05rem;        /* was 0.85rem — now larger */
       font-weight: 500;
       color: var(--black);
       text-decoration: none;
-      border-bottom: 1px solid var(--accent);
-      padding-bottom: 1px;
+      border-bottom: 1.5px solid var(--accent);
+      padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
 
@@ -141,6 +153,11 @@
       font-weight: 300;
     }
 
+    /* FIX 4: indented paragraphs for numbered items */
+    section p.indented {
+      padding-left: 2rem;
+    }
+
     section p a {
       color: var(--black);
       font-weight: 500;
@@ -173,21 +190,10 @@
       box-shadow: 0 12px 32px rgba(0,0,0,0.08);
     }
 
-    .card-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      /* Placeholder colour blocks – swap for real images */
-      background: linear-gradient(135deg, #f0ebe3 0%, #e2d9cc 100%);
-    }
-
-    .card-thumb.blue   { background: linear-gradient(135deg, #dde8f0 0%, #c5d8e8 100%); }
-    .card-thumb.green  { background: linear-gradient(135deg, #dff0e8 0%, #c5e0d2 100%); }
-    .card-thumb.warm   { background: linear-gradient(135deg, #f0e8dd 0%, #e0d0c0 100%); }
-
     .card-body {
       padding: 1rem 1.1rem 1.2rem;
+      /* FIX 5 (partial, CSS side): background matches page bg so cards look floating */
+      background: var(--bg);
     }
 
     .card-body h3 {
@@ -203,6 +209,42 @@
       color: var(--mid);
       line-height: 1.5;
       font-weight: 400;
+    }
+
+    /* ── GIF CARDS ── */
+    .card-thumb-gif {
+      width: 100%;
+      aspect-ratio: 4/3;
+      /* FIX 5: background matches page so card appears to float */
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card-gif {
+      image-rendering: pixelated;
+      height: 80%;
+      width: auto;
+      max-height: 120px;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+    }
+
+    .gif-card:hover .card-gif {
+      transform: scale(1.1);
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2));
+    }
+
+    /* Remove the border on gif cards so they truly look frameless/floating */
+    .gif-card {
+      border-color: transparent;
+      box-shadow: none;
+    }
+
+    .gif-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
     }
 
     /* ── FOOTER ── */
@@ -234,14 +276,13 @@
   </nav>
 
   <!-- ── HEADER / PROFILE ── -->
+  <!-- FIX 1: <img> is now correctly placed in HTML, not inside a CSS rule -->
   <header>
-    <img src="profile.png" alt="ProfileUriellu" class="profile-pic" />;
+    <img src="profile.png" alt="Meredith McCarty" class="profile-pic" />
 
     <div class="hero-text">
       <h1>Meredith J McCarty</h1>
-      <p>
-        &#127759;
-      </p>
+      <!-- FIX 2: world emoji removed -->
       <div class="hero-links">
         <a href="/cdn-cgi/l/email-protection#b9c0d6ccf9dcc1d8d4c9d5dc97dad6d4">Email</a>
         <a href="https://linkedin.com/in/meredith-mccarty" target="_blank" rel="noopener">LinkedIn</a>
@@ -259,14 +300,15 @@
     <p>
       I am a Neuroscientist interested in attention, flexible cognition, neural dynamics across scale, and consciousness. 
     </p>
-      <p>
+    <p>
       The primary focus of my research is two pronged: 
     </p>
-    <p>
-      1. How neural dynamics are integrated at different scales (be that population dynamics or the activity of single neurons)
-      , and how this information is captured by different tools. 
+    <!-- FIX 4: numbered items indented with class="indented" -->
+    <p class="indented">
+      1. How neural dynamics are integrated at different scales, be that population dynamics or the activity of single neurons,
+      and how this information is captured by different tools. 
     </p>
-    <p>
+    <p class="indented">
       2. 
     </p>
     <p>
@@ -275,9 +317,9 @@
       at the University of Texas Health Science Center in Houston, TX, USA, where I also completed my PhD research. 
     </p>
     <p>
-        While I view science as a very creative process, I have invested much of my time into the visual arts, 
-      and share some of that work on this website. While I have dappled in many art forms- from filmmaking and directing music videos to 
-      making paper collages and clay sculptures- I primarily enjoy photography.  
+      While I view science as a very creative process, I have invested much of my time into the visual arts, 
+      and share some of that work on this website. While I have dappled in many art forms — from video art to  
+      making paper collages and clay sculptures and the occasional food sculpture — I primarily enjoy photography.  
     </p>
   </section>
 
@@ -307,50 +349,30 @@
         </div>
         <div class="card-body">
           <h3>Visual Arts</h3>
-          <p>Collection of my photography and perhaps some video work</p>
+          <p>Collection of my photography and perhaps some video work.</p>
         </div>
       </a>
 
-      <!-- Card 4 – Internet Facet -->
+      <!-- Card 3 – Internet Facet -->
       <a href="internet.html" class="card gif-card">
         <div class="card-thumb-gif">
           <img src="internet_candle.gif" alt="Flickering blue candle" class="card-gif" />
         </div>
         <div class="card-body">
           <h3>Internet Facet</h3>
-          <p>The internet is a big place. Here are some things I've been enjoying on the internet recently.</p>
+          <p>The internet is a big place. Here are some things I've been enjoying recently.</p>
         </div>
       </a>
 
     </div>
   </section>
 
-  <style>
-    .card-thumb-gif {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: #f5f2ee;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-    .card-gif {
-      image-rendering: pixelated;
-      height: 80%;
-      width: auto;
-      max-height: 120px;
-      transition: transform 0.25s ease, filter 0.25s ease;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
-    }
-    .gif-card:hover .card-gif {
-      transform: scale(1.1);
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2));
-    }
-  </style>
-
   <div class="divider"></div>
 
   <!-- ── FOOTER ── -->
   <footer>
-    &copy; 2026 Your Name &mdash; All rights 
+    &copy; 2026 Meredith J McCarty &mdash; All rights reserved
+  </footer>
+
+</body>
+</html>
