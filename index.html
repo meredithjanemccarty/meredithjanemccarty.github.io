@@ -14,19 +14,9 @@
       --mid: #555555;
       --light: #aaaaaa;
       --accent: #c8a96e;
-      --bg: #dfe3e0; /* FIX: muted sage-green, less bright/gray. Change to one of the options below if preferred. */
+      --bg: #ffffff;
       --border: #e8e8e8;
     }
-
-    /*
-      ── BACKGROUND COLOR OPTIONS ──
-      Option A (current): muted sage green   → #dfe3e0
-      Option B: dusty rose                   → #e8ddd8
-      Option C: warm slate blue              → #d8dde3
-      Option D: antique parchment            → #e6e0d4
-      Option E: soft terracotta              → #e3dbd5
-      To switch, change --bg above.
-    */
 
     body {
       font-family: 'DM Sans', sans-serif;
@@ -38,9 +28,8 @@
     /* ── NAV ── */
     nav {
       display: flex;
-      justify-content: flex-end;
+      justify-content: space-between;
       align-items: center;
-      gap: 2rem;
       padding: 1.5rem 3rem;
       border-bottom: 1px solid var(--border);
       position: sticky;
@@ -48,6 +37,22 @@
       background: rgba(255,255,255,0.92);
       backdrop-filter: blur(8px);
       z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
     }
 
     nav a {
@@ -62,73 +67,6 @@
 
     nav a:hover { color: var(--black); }
     nav a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-
-    /* ── HERO ── */
-    header {
-      display: flex;
-      align-items: center;
-      gap: 3rem;
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 5rem 2rem 3.5rem;
-    }
-
-    /* FIX 1: profile-pic is now purely a CSS class — no stray <img> tag inside it */
-    .profile-pic {
-      flex-shrink: 0;
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--border);
-    }
-
-    .hero-text h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.4rem, 5vw, 3.4rem);
-      font-weight: 700;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--black);
-    }
-
-    .hero-text .tagline {
-      margin-top: 0.6rem;
-      font-size: 1rem;
-      color: var(--mid);
-      font-weight: 300;
-      line-height: 1.6;
-      max-width: 480px;
-    }
-
-    /* FIX 3: hero links bigger, full width to match the h1 above */
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.2rem;
-      margin-top: 1.4rem;
-      width: 100%;
-    }
-
-    .hero-links a {
-      font-size: 1.05rem;        /* was 0.85rem — now larger */
-      font-weight: 500;
-      color: var(--black);
-      text-decoration: none;
-      border-bottom: 1.5px solid var(--accent);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .hero-links a:hover { color: var(--accent); }
-
-    /* ── DIVIDER ── */
-    .divider {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      border-top: 1px solid var(--border);
-    }
 
     /* ── ABOUT SECTION ── */
     section {
@@ -153,7 +91,6 @@
       font-weight: 300;
     }
 
-    /* FIX 4: indented paragraphs for numbered items */
     section p.indented {
       padding-left: 2rem;
     }
@@ -168,83 +105,29 @@
 
     section p a:hover { color: var(--accent); }
 
-    /* ── SUBPAGE CARDS ── */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-
-    .card {
-      display: block;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.22s ease, box-shadow 0.22s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
-    }
-
-    .card-body {
-      padding: 1rem 1.1rem 1.2rem;
-      /* FIX 5 (partial, CSS side): background matches page bg so cards look floating */
-      background: var(--bg);
-    }
-
-    .card-body h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--black);
-      margin-bottom: 0.3rem;
-    }
-
-    .card-body p {
-      font-size: 0.82rem;
-      color: var(--mid);
-      line-height: 1.5;
-      font-weight: 400;
-    }
-
-    /* ── GIF CARDS ── */
-    .card-thumb-gif {
-      width: 100%;
-      aspect-ratio: 4/3;
-      /* FIX 5: background matches page so card appears to float */
-      background: var(--bg);
+    /* ── CENTERED IMAGE ── */
+    .feature-image-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 2rem 3.5rem;
       display: flex;
-      align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
-    .card-gif {
-      image-rendering: pixelated;
-      height: 80%;
-      width: auto;
-      max-height: 120px;
-      transition: transform 0.25s ease, filter 0.25s ease;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
+    .feature-image-wrap img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      display: block;
+      object-fit: cover;
     }
 
-    .gif-card:hover .card-gif {
-      transform: scale(1.1);
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.2));
-    }
-
-    /* Remove the border on gif cards so they truly look frameless/floating */
-    .gif-card {
-      border-color: transparent;
-      box-shadow: none;
-    }
-
-    .gif-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
     }
 
     /* ── FOOTER ── */
@@ -259,9 +142,9 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 580px) {
-      nav { padding: 1.2rem 1.5rem; gap: 1.2rem; }
-      header { flex-direction: column; align-items: flex-start; padding: 3rem 1.5rem 2.5rem; gap: 1.5rem; }
+      nav { padding: 1.2rem 1.5rem; }
       section { padding: 2.5rem 1.5rem; }
+      .feature-image-wrap { padding: 1.5rem 1.5rem 2.5rem; }
     }
   </style>
 </head>
@@ -269,21 +152,18 @@
 
   <!-- ── NAVIGATION ── -->
   <nav>
-    <a href="index.html" class="active">Home</a>
-    <a href="research.html">Research</a>
-    <a href="visualarts.html">Visual Arts</a>
-    <a href="internet.html">Internet</a>
+    <a href="index.html" class="nav-name">Meredith J McCarty</a>
+    <div class="nav-links">
+      <a href="research.html">Research</a>
+      <a href="visualarts.html">Visual Arts</a>
+      <a href="internet.html">Internet</a>
+    </div>
   </nav>
 
-  <!-- ── HEADER / PROFILE ── -->
-  <!-- FIX 1: <img> is now correctly placed in HTML, not inside a CSS rule -->
-  <header>
-    <img src="profile.png" alt="Meredith McCarty" class="profile-pic" />
-
-    <div class="hero-text">
-      <h1>Meredith J McCarty</h1>
-    </div>
-  </header>
+  <!-- ── CENTERED IMAGE ── -->
+  <div class="feature-image-wrap">
+    <img src="1.jpg" alt="Featured image" />
+  </div>
 
   <div class="divider"></div>
 
@@ -296,7 +176,6 @@
     <p>
       The primary focus of my research is two pronged: 
     </p>
-    <!-- FIX 4: numbered items indented with class="indented" -->
     <p class="indented">
       1. How neural dynamics are integrated at different scales, be that population dynamics or the activity of single neurons,
       and how this information is captured by different tools. 
@@ -318,51 +197,7 @@
 
   <div class="divider"></div>
 
-  <!-- ── SUBPAGES / CARDS ── -->
-  <section>
-    <h2>Explore</h2>
-
-    <div class="cards">
-
-      <!-- Card 1 – Scientific Research -->
-      <a href="research.html" class="card gif-card">
-        <div class="card-thumb-gif">
-          <img src="magnifier.gif" alt="Rotating magnifying glass" class="card-gif" />
-        </div>
-        <div class="card-body">
-          <h3>Scientific Research</h3>
-          <p>Overview of my research focus and future directions.</p>
-        </div>
-      </a>
-
-      <!-- Card 2 – Visual Arts -->
-      <a href="visualarts.html" class="card gif-card">
-        <div class="card-thumb-gif">
-          <img src="eyeball.gif" alt="Blinking eye" class="card-gif" />
-        </div>
-        <div class="card-body">
-          <h3>Visual Arts</h3>
-          <p>Collection of my photography and perhaps some video work.</p>
-        </div>
-      </a>
-
-      <!-- Card 3 – Internet Facet -->
-      <a href="internet.html" class="card gif-card">
-        <div class="card-thumb-gif">
-          <img src="internet_candle.gif" alt="Flickering blue candle" class="card-gif" />
-        </div>
-        <div class="card-body">
-          <h3>Internet Facet</h3>
-          <p>The internet is a big place. Here are some things I've been enjoying recently.</p>
-        </div>
-      </a>
-
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- ── FOOTER ── -->
+  <!-- ── FOOTER ── */
   <footer>
     &copy; 2026 Meredith J McCarty &mdash; All rights reserved
   </footer>
