@@ -64,218 +64,202 @@
 
     /* ── BUBBLE OVERVIEW ── */
     .bubble-section {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 3rem 2rem;
+      display: flex; justify-content: center; align-items: center; padding: 3rem 2rem;
     }
-
     .bubble {
       position: relative;
-      /* Scales with viewport, never overflows, capped at 460px */
-      width: min(460px, 88vw);
-      height: min(460px, 88vw);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: min(460px, 88vw); height: min(460px, 88vw);
+      display: flex; align-items: center; justify-content: center;
     }
-
-    .bubble-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-    }
-
-    .bubble-text {
-      position: relative;
-      z-index: 2;
-      /* 62% keeps text comfortably inside the circle at all sizes */
-      width: 62%;
-      text-align: center;
-    }
-
+    .bubble-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .bubble-text { position: relative; z-index: 2; width: 62%; text-align: center; }
     .bubble-text h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1rem, 3.8vw, 1.5rem);
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 0.7rem;
+      font-size: clamp(1rem, 3.8vw, 1.5rem); font-weight: 600; color: var(--white); margin-bottom: 0.7rem;
     }
-
     .bubble-text p {
-      font-size: clamp(0.68rem, 2.2vw, 0.88rem);
-      line-height: 1.7;
-      color: rgba(240,236,230,0.82);
-      font-weight: 300;
-      margin-bottom: 0.55rem;
+      font-size: clamp(0.68rem, 2.2vw, 0.88rem); line-height: 1.7;
+      color: rgba(240,236,230,0.82); font-weight: 300; margin-bottom: 0.55rem;
     }
     .bubble-text p:last-child { margin-bottom: 0; }
 
     /* ── ALBUMS ── */
     .albums-section { padding: 0 0 4rem; }
-
     .albums-section > h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.6rem; font-weight: 600; color: var(--white);
-      padding: 2rem 3rem 1.5rem;
-      border-top: 1px solid var(--border);
+      padding: 2rem 3rem 1.5rem; border-top: 1px solid var(--border);
     }
-
-    .album {
-      width: 100%;
-      border-top: 1px solid var(--border);
-      cursor: pointer;
-    }
+    .album { width: 100%; border-top: 1px solid var(--border); cursor: pointer; }
     .album:last-child { border-bottom: 1px solid var(--border); }
-
     .album-header {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.8rem 3rem;
-      transition: background 0.25s;
+      padding: 1.8rem 3rem; transition: background 0.25s;
     }
     .album:hover .album-header { background: rgba(255,255,255,0.03); }
-
     .album-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 2rem; font-weight: 600; color: var(--white);
     }
-
     .album-meta {
       font-size: 0.82rem; color: var(--mid);
       letter-spacing: 0.06em; text-transform: uppercase;
       display: flex; align-items: center; gap: 1.5rem;
     }
-
     .album-toggle {
       font-size: 1.4rem; color: var(--accent);
       transition: transform 0.3s ease; user-select: none;
     }
     .album.open .album-toggle { transform: rotate(45deg); }
-
     .album-photos { display: none; padding: 0 3rem 2rem; }
     .album.open .album-photos { display: block; }
 
-    .thumb-strip {
-      display: flex;
-      gap: 5px;
-      flex-wrap: wrap;
+    /* ── COLLECTION TILES ── */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
 
-    /* Each thumb is 1/3 of strip width */
-    .thumb {
-      width: calc(33.333% - 4px);
+    .collection-tile {
+      position: relative;
       aspect-ratio: 3/2;
-      object-fit: cover;
+      overflow: hidden;
       cursor: pointer;
-      transition: opacity 0.2s, transform 0.2s;
       border-radius: 2px;
     }
-    img.thumb { display: block; }
 
-    /* Fallback placeholder div styled to match */
-    div.thumb {
-      background: #2a2a2a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.7rem;
-      color: var(--light);
-      font-style: italic;
+    .collection-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease, filter 0.35s ease;
     }
 
-    .thumb:hover { opacity: 0.72; transform: scale(0.975); }
+    .collection-tile:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.45);
+    }
 
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none;
-      position: fixed;
+    /* placeholder when image missing */
+    .collection-tile .tile-placeholder {
+      width: 100%; height: 100%;
+      background: #2a2a2a;
+      display: flex; align-items: center; justify-content: center;
+      transition: filter 0.35s ease;
+    }
+    .collection-tile:hover .tile-placeholder { filter: brightness(0.45); }
+
+    .collection-tile .tile-label {
+      position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.93);
-      z-index: 1000;
+      display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      backdrop-filter: blur(6px);
+      gap: 0.3rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .collection-tile:hover .tile-label { opacity: 1; }
+
+    .tile-label-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 2vw, 1.3rem);
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 0 0.5rem;
+    }
+
+    .tile-label-hint {
+      font-size: 0.72rem;
+      color: rgba(240,236,230,0.6);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000; flex-direction: column;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
     }
     .lightbox.active { display: flex; }
 
+    .lb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: rgba(240,236,230,0.5);
+      letter-spacing: 0.06em;
+      margin-bottom: 1.2rem;
+    }
+
     .lb-main {
-      position: relative;
-      width: 100%;
-      max-width: 920px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: relative; width: 100%; max-width: 920px;
+      display: flex; align-items: center; justify-content: center;
       padding: 0 4rem;
     }
-
     .lb-img-wrap {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; display: flex;
+      align-items: center; justify-content: center;
       min-height: 55vh;
     }
-
     .lb-img-wrap img {
-      max-width: 100%;
-      max-height: 68vh;
-      object-fit: contain;
-      border-radius: 3px;
+      max-width: 100%; max-height: 68vh;
+      object-fit: contain; border-radius: 3px;
       box-shadow: 0 20px 80px rgba(0,0,0,0.7);
     }
-
     .lb-placeholder {
-      width: 560px; max-width: 100%;
-      aspect-ratio: 3/2;
-      background: #2a2a2a;
-      border-radius: 3px;
+      width: 560px; max-width: 100%; aspect-ratio: 3/2;
+      background: #2a2a2a; border-radius: 3px;
       display: flex; align-items: center; justify-content: center;
       font-size: 0.9rem; color: var(--light); font-style: italic;
     }
-
     .lb-arrow {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      background: none;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: var(--white);
-      font-size: 1.3rem;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white); font-size: 1.3rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: background 0.2s, border-color 0.2s;
     }
     .lb-arrow:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.45); }
     .lb-arrow.prev { left: 0; }
     .lb-arrow.next { right: 0; }
-
     .lb-close {
       position: fixed; top: 1.4rem; right: 1.6rem;
-      background: none; border: none;
-      color: var(--white); font-size: 1.7rem;
-      cursor: pointer; opacity: 0.55;
+      background: none; border: none; color: var(--white);
+      font-size: 1.7rem; cursor: pointer; opacity: 0.55;
       transition: opacity 0.2s; line-height: 1;
     }
     .lb-close:hover { opacity: 1; }
-
-    .lb-counter {
-      margin-top: 1rem;
-      font-size: 0.8rem; color: var(--mid); letter-spacing: 0.08em;
-    }
-
-    .lb-dots {
-      display: flex; gap: 6px; margin-top: 0.9rem;
-    }
+    .lb-counter { margin-top: 1rem; font-size: 0.8rem; color: var(--mid); letter-spacing: 0.08em; }
+    .lb-dots { display: flex; gap: 6px; margin-top: 0.9rem; }
     .lb-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: rgba(255,255,255,0.22);
       cursor: pointer; transition: background 0.2s;
     }
     .lb-dot.active { background: var(--accent); }
+
+    /* ── GEAR ── */
+    .gear-section {
+      display: flex; gap: 3rem; justify-content: center;
+      align-items: flex-start; padding: 3.5rem 3rem 4rem;
+    }
+    .gear-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 280px; }
+    .gear-img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border-radius: 3px; filter: grayscale(20%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .gear-caption { font-size: 0.88rem; color: var(--mid); font-weight: 300; line-height: 1.65; text-align: center; }
 
     /* ── FOOTER ── */
     footer {
@@ -294,11 +278,12 @@
       .album-title { font-size: 1.5rem; }
       .albums-section > h2 { padding: 1.5rem 1.5rem 1rem; }
       .album-photos { padding: 0 1.5rem 1.5rem; }
-      /* 2 columns on mobile */
-      .thumb { width: calc(50% - 3px); }
+      .collection-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
       .lb-main { padding: 0 2.8rem; }
       .lb-arrow { width: 36px; height: 36px; font-size: 1rem; }
       .lb-img-wrap img { max-height: 55vw; }
+      .gear-section { flex-direction: column; align-items: center; padding: 2.5rem 1.5rem 3rem; gap: 2.5rem; }
+      .gear-item { max-width: 90%; }
     }
   </style>
 </head>
@@ -310,7 +295,6 @@
       <a href="research.html">Research</a>
       <a href="visualarts.html" class="active">Visual Arts</a>
       <a href="internet.html">Internet</a>
-      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
@@ -318,13 +302,12 @@
     <img src="eyeball.gif" alt="Blinking eye" class="page-gif" />
     <div>
       <h1>Visual Arts</h1>
-      <p>Collection of my photography and other works.</p>
     </div>
   </header>
 
   <div class="divider"></div>
 
-  <!-- ── BUBBLE OVERVIEW ── -->
+  <!-- ── BUBBLE ── -->
   <div class="bubble-section">
     <div class="bubble">
       <svg class="bubble-svg" viewBox="0 0 460 460" xmlns="http://www.w3.org/2000/svg">
@@ -355,10 +338,9 @@
           fill="white" fill-opacity="0.11" transform="rotate(-30 170 158)" filter="url(#glow)"/>
         <circle cx="162" cy="148" r="7" fill="white" fill-opacity="0.25"/>
       </svg>
-
       <div class="bubble-text">
         <h2>Hey.</h2>
-        <p>This is a digital home for these photos. I may expand it to other art forms over time.</p>
+        <p>This is a digital home for these images. I will likely expand it to other art forms over time.</p>
       </div>
     </div>
   </div>
@@ -367,6 +349,7 @@
 
   <!-- ── ALBUMS ── -->
   <div class="albums-section">
+
     <!-- PHOTOGRAPHY -->
     <div class="album" onclick="toggleAlbum(this)">
       <div class="album-header">
@@ -377,7 +360,7 @@
         </div>
       </div>
       <div class="album-photos" onclick="event.stopPropagation()">
-        <div class="thumb-strip" id="photography-strip"></div>
+        <div class="collection-grid" id="photography-grid"></div>
       </div>
     </div>
 
@@ -391,7 +374,7 @@
         </div>
       </div>
       <div class="album-photos" onclick="event.stopPropagation()">
-        <div class="thumb-strip" id="collage-strip"></div>
+        <div class="collection-grid" id="collage-grid"></div>
       </div>
     </div>
 
@@ -405,7 +388,7 @@
         </div>
       </div>
       <div class="album-photos" onclick="event.stopPropagation()">
-        <div class="thumb-strip" id="video-strip"></div>
+        <div class="collection-grid" id="video-grid"></div>
       </div>
     </div>
 
@@ -414,6 +397,7 @@
   <!-- ── LIGHTBOX ── -->
   <div class="lightbox" id="lightbox">
     <button class="lb-close" onclick="closeLightbox()">&#x2715;</button>
+    <div class="lb-title" id="lb-title"></div>
     <div class="lb-main">
       <button class="lb-arrow prev" onclick="stepLightbox(-1)">&#8592;</button>
       <div class="lb-img-wrap" id="lb-img-wrap"></div>
@@ -423,131 +407,140 @@
     <div class="lb-dots" id="lb-dots"></div>
   </div>
 
-  <!-- ── GEAR SECTION ── -->
+  <!-- ── GEAR ── -->
   <div class="divider"></div>
   <div class="gear-section">
     <div class="gear-item">
-      <img src="camera_01.jpg" alt="Konica Autoreflex T" class="gear-img" />
-      <p class="gear-caption">I primarily shoot on my trusty Konica Autoreflex T.</p>
+      <img src="camera1.png" alt="Konica Autoreflex T" class="gear-img" />
+      <p class="gear-caption">I primarily shoot on this gorgeous Konica Autoreflex T. I got it in Austin at a Big Medium garage sale in 2017.</p>
     </div>
     <div class="gear-item">
-      <img src="camera_02.jpg" alt="Minolta P series" class="gear-img" />
-      <p class="gear-caption">For friends starting out: the Minolta P series makes a wonderful point-and-shoot with a cool wide format look.</p>
+      <img src="minolta.png" alt="Minolta P series" class="gear-img" />
+      <p class="gear-caption">Got this camera from my friend Bryce and its so fun! Minolta P series makes a wonderful point-and-shoot with a cool wide format look.</p>
     </div>
   </div>
-
-  <style>
-    .gear-section {
-      display: flex;
-      gap: 3rem;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 3.5rem 3rem 4rem;
-    }
-    .gear-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-      max-width: 280px;
-    }
-    .gear-img {
-      width: 100%;
-      aspect-ratio: 3/4;
-      object-fit: cover;
-      border-radius: 3px;
-      filter: grayscale(20%);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-    }
-    .gear-caption {
-      font-size: 0.88rem;
-      color: var(--mid);
-      font-weight: 300;
-      line-height: 1.65;
-      text-align: center;
-    }
-    @media (max-width: 600px) {
-      .gear-section { flex-direction: column; align-items: center; padding: 2.5rem 1.5rem 3rem; gap: 2.5rem; }
-      .gear-item { max-width: 90%; }
-    }
-  </style>
 
   <footer>&copy; 2026 Meredith J McCarty</footer>
 
   <script>
     /* ============================================================
-       PHOTO ARRAYS — edit these to add your images
-       ============================================================
-       Format: { src: "path/to/file", alt: "description" }
-
-       Your folder structure:
-         /photos/photo_1.jpg
-         /photos/photo_2.jpg
-         ... etc.
-
-       Assign photos to albums by putting them in the right array.
-       Photography, Collage, and Video each have their own.
+       COLLECTIONS
+       Each entry is a tile in the grid. It has:
+         name    — label shown on hover
+         cover   — the thumbnail image (photo1.png, photo2.png, etc.)
+         folder  — subfolder containing the gallery images
+         images  — filenames inside that folder (picture1.jpg … picture10.jpg)
     ============================================================ */
 
-    const photographyPhotos = [
-      { src: "photos/R1-09645-0028.png",  alt: "Photo 1"  },
-      { src: "photos/photo_2.jpg",  alt: "Photo 2"  },
-      { src: "photos/photo_3.jpg",  alt: "Photo 3"  },
-      { src: "photos/photo_4.jpg",  alt: "Photo 4"  },
-      { src: "photos/photo_5.jpg",  alt: "Photo 5"  },
-      { src: "photos/photo_6.jpg",  alt: "Photo 6"  },
+    const photographyCollections = [
+      {
+        name:   "Landscapes",
+        cover:  "photo1.png",
+        folder: "landscape",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
+      {
+        name:   "Landscape 2",
+        cover:  "photo2.png",
+        folder: "landscape2",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
+      {
+        name:   "Landscape 3",
+        cover:  "photo3.png",
+        folder: "landscape3",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
     ];
 
-    const collagePhotos = [
-      { src: "photos/photo_7.jpg",  alt: "Collage 1" },
-      { src: "photos/photo_8.jpg",  alt: "Collage 2" },
-      { src: "photos/photo_9.jpg",  alt: "Collage 3" },
+    const collageCollections = [
+      {
+        name:   "Collage 1",
+        cover:  "photo4.png",
+        folder: "collage1",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
+      {
+        name:   "Collage 2",
+        cover:  "photo5.png",
+        folder: "collage2",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
     ];
 
-    const videoPhotos = [
-      { src: "photos/photo_10.jpg", alt: "Video still 1" },
-      { src: "photos/photo_11.jpg", alt: "Video still 2" },
+    const videoCollections = [
+      {
+        name:   "Video 1",
+        cover:  "photo6.png",
+        folder: "video1",
+        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
+                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
+                 "picture9.jpg","picture10.jpg"]
+      },
     ];
 
     /* ============================================================
-       AUTO-BUILD THUMBNAIL STRIPS
-       No need to write <img> tags by hand — just keep the arrays
-       above up to date.
+       BUILD COLLECTION GRIDS
     ============================================================ */
-    function buildStrip(photos, stripId) {
-      const strip = document.getElementById(stripId);
-      if (!strip) return;
-      photos.forEach((photo, i) => {
+    function buildGrid(collections, gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+
+      collections.forEach(col => {
+        const tile = document.createElement('div');
+        tile.className = 'collection-tile';
+        tile.onclick = () => openLightbox(col);
+
         const img = document.createElement('img');
-        img.className = 'thumb';
-        img.src = photo.src;
-        img.alt = photo.alt;
-        img.onclick = () => openLightbox(photos, i);
-        img.onerror = function () {
-          // Swap broken img for a labelled placeholder div
+        img.src = col.cover;
+        img.alt = col.name;
+        img.onerror = function() {
           const ph = document.createElement('div');
-          ph.className = 'thumb';
-          ph.textContent = photo.alt;
-          ph.onclick = () => openLightbox(photos, i);
-          strip.replaceChild(ph, img);
+          ph.className = 'tile-placeholder';
+          tile.replaceChild(ph, img);
         };
-        strip.appendChild(img);
+
+        const label = document.createElement('div');
+        label.className = 'tile-label';
+        label.innerHTML = `
+          <div class="tile-label-name">${col.name}</div>
+          <div class="tile-label-hint">view series →</div>
+        `;
+
+        tile.appendChild(img);
+        tile.appendChild(label);
+        grid.appendChild(tile);
       });
     }
 
-    buildStrip(photographyPhotos, 'photography-strip');
-    buildStrip(collagePhotos,     'collage-strip');
-    buildStrip(videoPhotos,       'video-strip');
+    buildGrid(photographyCollections, 'photography-grid');
+    buildGrid(collageCollections,     'collage-grid');
+    buildGrid(videoCollections,       'video-grid');
 
     /* ============================================================
        LIGHTBOX
     ============================================================ */
-    let currentPhotos = [];
+    let currentImages = [];
     let currentIndex  = 0;
+    let currentTitle  = '';
 
-    function openLightbox(photos, index) {
-      currentPhotos = photos;
-      currentIndex  = index;
+    function openLightbox(collection) {
+      currentTitle  = collection.name;
+      currentImages = collection.images.map(f => ({
+        src: `${collection.folder}/${f}`,
+        alt: `${collection.name} — ${f}`
+      }));
+      currentIndex = 0;
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
       renderLightbox();
@@ -559,15 +552,18 @@
     }
 
     function stepLightbox(dir) {
-      currentIndex = (currentIndex + dir + currentPhotos.length) % currentPhotos.length;
+      currentIndex = (currentIndex + dir + currentImages.length) % currentImages.length;
       renderLightbox();
     }
 
     function renderLightbox() {
-      const photo   = currentPhotos[currentIndex];
+      const photo   = currentImages[currentIndex];
       const wrap    = document.getElementById('lb-img-wrap');
       const counter = document.getElementById('lb-counter');
       const dots    = document.getElementById('lb-dots');
+      const title   = document.getElementById('lb-title');
+
+      title.textContent = currentTitle;
 
       wrap.innerHTML = '';
       const img = document.createElement('img');
@@ -578,11 +574,11 @@
       };
       wrap.appendChild(img);
 
-      counter.textContent = `${currentIndex + 1} / ${currentPhotos.length}`;
+      counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
 
       dots.innerHTML = '';
-      if (currentPhotos.length <= 14) {
-        currentPhotos.forEach((_, i) => {
+      if (currentImages.length <= 14) {
+        currentImages.forEach((_, i) => {
           const d = document.createElement('div');
           d.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
           d.onclick = () => { currentIndex = i; renderLightbox(); };
@@ -591,7 +587,6 @@
       }
     }
 
-    // Keyboard nav
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('active')) return;
       if (e.key === 'ArrowRight') stepLightbox(1);
@@ -599,7 +594,6 @@
       if (e.key === 'Escape')     closeLightbox();
     });
 
-    // Click outside image to close
     document.getElementById('lightbox').addEventListener('click', function(e) {
       if (e.target === this) closeLightbox();
     });
