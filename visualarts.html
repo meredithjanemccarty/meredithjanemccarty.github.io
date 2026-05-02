@@ -45,7 +45,7 @@
 
     /* ── HEADER ── */
     header {
-      display: flex; align-items: center; gap: 2.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 2.5rem;
       max-width: 820px; margin: 0 auto; padding: 5rem 2rem 3rem;
     }
     .page-gif {
@@ -318,7 +318,7 @@
     <!-- VIDEO -->
     <div class="album" onclick="toggleAlbum(this)">
       <div class="album-header">
-        <span class="album-title">Video Work</span>
+        <span class="album-title">Videography</span>
         <div class="album-meta">
           <span>Moving image</span>
           <span class="album-toggle">+</span>
@@ -371,29 +371,44 @@
 
     const photographyCollections = [
       {
-        name:   "Landscapes",
-        cover:  "photo1.png",
-        folder: "landscape",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
+        name:   "Textures",
+        cover:  "T17.png",
+        folder: "textures",
+        images: ["T1.png","T2.png","T3.png","T4.png",
+                 "T5.png","T6.png","T7.png","T8.png",
+                 "T9.png","T10.png","T11.png","T12.png",
+                 "T13.png","T14.png","T15.png","T16.png","T18.png"]
       },
       {
-        name:   "Landscape 2",
-        cover:  "photo2.png",
-        folder: "landscape2",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
+        name:   "Portraits",
+        cover:  "P1.png",
+        folder: "people",
+        images: ["P1.png","P2.png","P3.png","P4.png",
+                 "P5.png","P6.png","P7.png","P8.png",
+                 "P9.png","P10.png","P11.png","P12.png",
+                 "P13.png","P14.png","P15.png","P16.png",
+                 "P17.png","P18.png","P19.png","P20.png","P21.png"]
       },
       {
-        name:   "Landscape 3",
-        cover:  "photo3.png",
-        folder: "landscape3",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
+        name:   "Vistas",
+        cover:  "V5.png",
+        folder: "vistas",
+        images: ["V1.png","V2.png","V3.png","V4.png",
+                 "V5.png","V6.png","V7.png","V8.png",
+                 "V9.png","V10.png"]
       },
+      {
+        name:   "*landscape*",
+        cover:  "M28.png",
+        folder: "minolta",
+        images: ["M1.png","M2.png","M3.png","M4.png",
+                 "M5.png","M6.png","M7.png","M8.png",
+                 "M9.png","M10.png","M11.png","M12.png",
+                 "M13.png","M14.png","M15.png","M16.png",
+                 "M17.png","M18.png","M19.png","M20.png",
+                 "M21.png","M22.png","M23.png","M24.png",
+                 "M25.png","M26.png","M27.png"]
+      }
     ];
 
     const collageCollections = [
