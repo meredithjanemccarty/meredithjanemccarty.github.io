@@ -58,17 +58,11 @@
       font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.05;
       color: var(--white);
     }
-    header p { margin-top: 0.7rem; font-size: 1rem; color: var(--mid); font-weight: 300; line-height: 1.7; }
 
     .divider { max-width: 820px; margin: 0 auto; padding: 0 2rem; border-top: 1px solid var(--border); }
 
     /* ── ALBUMS ── */
     .albums-section { padding: 0 0 4rem; }
-    .albums-section > h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem; font-weight: 600; color: var(--white);
-      padding: 2rem 3rem 1.5rem; border-top: 1px solid var(--border);
-    }
     .album { width: 100%; border-top: 1px solid var(--border); cursor: pointer; }
     .album:last-child { border-bottom: 1px solid var(--border); }
     .album-header {
@@ -99,101 +93,79 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
     }
-
     .collection-tile {
-      position: relative;
-      aspect-ratio: 3/2;
-      overflow: hidden;
-      cursor: pointer;
-      border-radius: 2px;
+      position: relative; aspect-ratio: 3/2;
+      overflow: hidden; cursor: pointer; border-radius: 2px;
     }
-
     .collection-tile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.35s ease, filter 0.35s ease;
     }
-
-    .collection-tile:hover img {
-      transform: scale(1.04);
-      filter: brightness(0.45);
-    }
-
-    /* placeholder when image missing */
+    .collection-tile:hover img { transform: scale(1.04); filter: brightness(0.45); }
     .collection-tile .tile-placeholder {
-      width: 100%; height: 100%;
-      background: #2a2a2a;
+      width: 100%; height: 100%; background: #2a2a2a;
       display: flex; align-items: center; justify-content: center;
       transition: filter 0.35s ease;
     }
     .collection-tile:hover .tile-placeholder { filter: brightness(0.45); }
-
     .collection-tile .tile-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.3rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.3rem; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
     }
     .collection-tile:hover .tile-label { opacity: 1; }
-
     .tile-label-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(0.95rem, 2vw, 1.3rem);
-      font-weight: 600;
-      color: var(--white);
-      letter-spacing: 0.04em;
-      text-align: center;
-      padding: 0 0.5rem;
+      font-size: clamp(0.95rem, 2vw, 1.3rem); font-weight: 600;
+      color: var(--white); letter-spacing: 0.04em; text-align: center; padding: 0 0.5rem;
     }
-
     .tile-label-hint {
-      font-size: 0.72rem;
-      color: rgba(240,236,230,0.6);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.72rem; color: rgba(240,236,230,0.6);
+      letter-spacing: 0.1em; text-transform: uppercase;
     }
 
     /* ── LIGHTBOX ── */
     .lightbox {
       display: none; position: fixed; inset: 0;
-      background: rgba(0,0,0,0.95);
-      z-index: 1000; flex-direction: column;
-      align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.95); z-index: 1000;
+      flex-direction: column; align-items: center; justify-content: center;
       backdrop-filter: blur(8px);
     }
     .lightbox.active { display: flex; }
-
     .lb-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.1rem; font-style: italic;
-      color: rgba(240,236,230,0.5);
-      letter-spacing: 0.06em;
-      margin-bottom: 1.2rem;
+      color: rgba(240,236,230,0.5); letter-spacing: 0.06em; margin-bottom: 1.2rem;
     }
-
     .lb-main {
       position: relative; width: 100%; max-width: 920px;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 4rem;
+      display: flex; align-items: center; justify-content: center; padding: 0 4rem;
     }
     .lb-img-wrap {
-      width: 100%; display: flex;
-      align-items: center; justify-content: center;
-      min-height: 55vh;
+      width: 100%; display: flex; align-items: center; justify-content: center; min-height: 55vh;
     }
     .lb-img-wrap img {
-      max-width: 100%; max-height: 68vh;
-      object-fit: contain; border-radius: 3px;
+      max-width: 100%; max-height: 68vh; object-fit: contain;
+      border-radius: 3px; box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+    }
+
+    /* video embed in lightbox */
+    .lb-video-wrap {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.8rem;
+    }
+    .lb-video-wrap iframe {
+      width: 100%; max-width: 800px;
+      aspect-ratio: 16/9;
+      border: none; border-radius: 3px;
       box-shadow: 0 20px 80px rgba(0,0,0,0.7);
     }
+    .lb-video-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-style: italic;
+      color: rgba(240,236,230,0.55); letter-spacing: 0.04em;
+    }
+
     .lb-placeholder {
       width: 560px; max-width: 100%; aspect-ratio: 3/2;
       background: #2a2a2a; border-radius: 3px;
@@ -222,8 +194,7 @@
     .lb-dots { display: flex; gap: 6px; margin-top: 0.9rem; }
     .lb-dot {
       width: 6px; height: 6px; border-radius: 50%;
-      background: rgba(255,255,255,0.22);
-      cursor: pointer; transition: background 0.2s;
+      background: rgba(255,255,255,0.22); cursor: pointer; transition: background 0.2s;
     }
     .lb-dot.active { background: var(--accent); }
 
@@ -235,15 +206,13 @@
     .gear-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 280px; }
     .gear-img {
       width: 100%; aspect-ratio: 3/4; object-fit: cover;
-      border-radius: 3px; filter: grayscale(20%);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border-radius: 3px; filter: grayscale(20%); box-shadow: 0 8px 32px rgba(0,0,0,0.5);
     }
     .gear-caption { font-size: 0.88rem; color: var(--mid); font-weight: 300; line-height: 1.65; text-align: center; }
 
     /* ── FOOTER ── */
     footer {
-      border-top: 1px solid var(--border);
-      text-align: center; padding: 2rem;
+      border-top: 1px solid var(--border); text-align: center; padding: 2rem;
       font-size: 0.8rem; color: var(--light); letter-spacing: 0.04em;
     }
 
@@ -255,7 +224,6 @@
       .page-gif { width: 70px; }
       .album-header { padding: 1.2rem 1.5rem; }
       .album-title { font-size: 1.5rem; }
-      .albums-section > h2 { padding: 1.5rem 1.5rem 1rem; }
       .album-photos { padding: 0 1.5rem 1.5rem; }
       .collection-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
       .lb-main { padding: 0 2.8rem; }
@@ -361,18 +329,15 @@
 
   <script>
     /* ============================================================
-       COLLECTIONS
-       Each entry is a tile in the grid. It has:
-         name    — label shown on hover
-         cover   — the thumbnail image (photo1.png, photo2.png, etc.)
-         folder  — subfolder containing the gallery images
-         images  — filenames inside that folder (picture1.jpg … picture10.jpg)
+       PHOTOGRAPHY & COLLAGE COLLECTIONS
+       cover  — path to thumbnail shown in the grid
+       folder — subfolder containing gallery images
+       images — filenames inside that folder
     ============================================================ */
-
     const photographyCollections = [
       {
         name:   "Textures",
-        cover:  "T17.png",
+        cover:  "textures/T17.png",
         folder: "textures",
         images: ["T1.png","T2.png","T3.png","T4.png",
                  "T5.png","T6.png","T7.png","T8.png",
@@ -381,7 +346,7 @@
       },
       {
         name:   "Portraits",
-        cover:  "P1.png",
+        cover:  "people/P1.png",
         folder: "people",
         images: ["P1.png","P2.png","P3.png","P4.png",
                  "P5.png","P6.png","P7.png","P8.png",
@@ -391,7 +356,7 @@
       },
       {
         name:   "Vistas",
-        cover:  "V5.png",
+        cover:  "vistas/V5.png",
         folder: "vistas",
         images: ["V1.png","V2.png","V3.png","V4.png",
                  "V5.png","V6.png","V7.png","V8.png",
@@ -399,7 +364,7 @@
       },
       {
         name:   "*landscape*",
-        cover:  "M28.png",
+        cover:  "minolta/M28.png",
         folder: "minolta",
         images: ["M1.png","M2.png","M3.png","M4.png",
                  "M5.png","M6.png","M7.png","M8.png",
@@ -413,32 +378,38 @@
 
     const collageCollections = [
       {
-        name:   "Collage 1",
-        cover:  "photo4.png",
-        folder: "collage1",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
-      },
-      {
-        name:   "Collage 2",
-        cover:  "photo5.png",
-        folder: "collage2",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
+        name:   "Collage",
+        cover:  "collage/Scan 1.png",
+        folder: "collage",
+        images: ["Scan 1.jpg","Scan 2.jpg","Scan 5.jpg","Scan 6.jpg"]
       },
     ];
 
+    /* ============================================================
+       VIDEO COLLECTIONS
+       cover  — path to thumbnail shown in the grid
+       videos — array of { title, url } where url is a YouTube link.
+                The embed is extracted automatically.
+    ============================================================ */
     const videoCollections = [
       {
-        name:   "Video 1",
-        cover:  "photo6.png",
-        folder: "video1",
-        images: ["picture1.jpg","picture2.jpg","picture3.jpg","picture4.jpg",
-                 "picture5.jpg","picture6.jpg","picture7.jpg","picture8.jpg",
-                 "picture9.jpg","picture10.jpg"]
+        name:  "Short & Music Videos",
+        cover: "videos/video1.png",
+        videos: [
+          { title: "Music Video; White Denim", url: "https://www.youtube.com/watch?v=ucSVP-Bw7zw" },
+          { title: "Short Film", url: "https://vimeo.com/251604247?fl=pl&fe=vl" },
+          { title: "Music Video; Juniper Berries", url: "https://www.youtube.com/watch?v=2vtOJLxE2QM"},
+          {},
+        ]
       },
+      {
+        name:  "Atmospheric Videos",
+        cover: "videos/video4.png",
+        videos: [
+          { title: "Shinrin Yoku", url: "https://www.youtube.com/watch?v=Z2mx6AKmMF0" },
+          { title: "Sand Dunes", url: "https://www.youtube.com/watch?v=0ju7getvUk4"}
+        ]
+      }
     ];
 
     /* ============================================================
@@ -447,7 +418,6 @@
     function buildGrid(collections, gridId) {
       const grid = document.getElementById(gridId);
       if (!grid) return;
-
       collections.forEach(col => {
         const tile = document.createElement('div');
         tile.className = 'collection-tile';
@@ -480,18 +450,41 @@
     buildGrid(videoCollections,       'video-grid');
 
     /* ============================================================
-       LIGHTBOX
+       LIGHTBOX — handles both images and YouTube videos
     ============================================================ */
-    let currentImages = [];
+    let currentItems  = [];   // array of { type: 'image'|'video', ... }
     let currentIndex  = 0;
     let currentTitle  = '';
 
+    function youtubeEmbedUrl(watchUrl) {
+  // YouTube
+  const yt = watchUrl.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if (yt) return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
+  // Vimeo
+  const vm = watchUrl.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
+  return null;
+}
+
     function openLightbox(collection) {
-      currentTitle  = collection.name;
-      currentImages = collection.images.map(f => ({
-        src: `${collection.folder}/${f}`,
-        alt: `${collection.name} — ${f}`
-      }));
+      currentTitle = collection.name;
+
+      if (collection.videos) {
+        // Video collection
+        currentItems = collection.videos.map(v => ({
+          type:     'video',
+          title:    v.title,
+          embedUrl: youtubeEmbedUrl(v.url)
+        }));
+      } else {
+        // Image collection
+        currentItems = collection.images.map(f => ({
+          type: 'image',
+          src:  `${collection.folder}/${f}`,
+          alt:  `${collection.name} — ${f}`
+        }));
+      }
+
       currentIndex = 0;
       document.getElementById('lightbox').classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -499,38 +492,66 @@
     }
 
     function closeLightbox() {
+      // Clear iframe src to stop video playback when closing
+      document.getElementById('lb-img-wrap').innerHTML = '';
       document.getElementById('lightbox').classList.remove('active');
       document.body.style.overflow = '';
     }
 
     function stepLightbox(dir) {
-      currentIndex = (currentIndex + dir + currentImages.length) % currentImages.length;
+      currentIndex = (currentIndex + dir + currentItems.length) % currentItems.length;
       renderLightbox();
     }
 
     function renderLightbox() {
-      const photo   = currentImages[currentIndex];
+      const item    = currentItems[currentIndex];
       const wrap    = document.getElementById('lb-img-wrap');
       const counter = document.getElementById('lb-counter');
       const dots    = document.getElementById('lb-dots');
       const title   = document.getElementById('lb-title');
 
       title.textContent = currentTitle;
-
       wrap.innerHTML = '';
-      const img = document.createElement('img');
-      img.src = photo.src;
-      img.alt = photo.alt;
-      img.onerror = () => {
-        wrap.innerHTML = `<div class="lb-placeholder">${photo.alt}</div>`;
-      };
-      wrap.appendChild(img);
 
-      counter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+      if (item.type === 'video') {
+        // Render YouTube embed
+        const videoWrap = document.createElement('div');
+        videoWrap.className = 'lb-video-wrap';
+
+        if (item.embedUrl) {
+          const iframe = document.createElement('iframe');
+          iframe.src = item.embedUrl;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          videoWrap.appendChild(iframe);
+        } else {
+          videoWrap.innerHTML = `<div class="lb-placeholder">Video unavailable</div>`;
+        }
+
+        if (item.title) {
+          const vtitle = document.createElement('div');
+          vtitle.className = 'lb-video-title';
+          vtitle.textContent = item.title;
+          videoWrap.appendChild(vtitle);
+        }
+
+        wrap.appendChild(videoWrap);
+      } else {
+        // Render image
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        img.onerror = () => {
+          wrap.innerHTML = `<div class="lb-placeholder">${item.alt}</div>`;
+        };
+        wrap.appendChild(img);
+      }
+
+      counter.textContent = `${currentIndex + 1} / ${currentItems.length}`;
 
       dots.innerHTML = '';
-      if (currentImages.length <= 14) {
-        currentImages.forEach((_, i) => {
+      if (currentItems.length <= 14) {
+        currentItems.forEach((_, i) => {
           const d = document.createElement('div');
           d.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
           d.onclick = () => { currentIndex = i; renderLightbox(); };
