@@ -10,8 +10,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black: #111111; --mid: #555555; --light: #aaaaaa;
-      --accent: #3a7fc1; --bg: #e8e8e8; --border: #e8e8e8;
-      --bg-tint: #f4f7fb;
+      --accent: #3a7fc1; --bg: #ffffff; --border: #e8e8e8;
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--black); min-height: 100vh; }
     nav {
@@ -26,7 +25,7 @@
     nav .back::before { content: '← '; }
 
     header {
-      display: flex; align-items: center; gap: 2.5rem;
+      display: flex; align-items: center; justify-content: center; gap: 2.5rem;
       max-width: 820px; margin: 0 auto; padding: 5rem 2rem 3rem;
     }
     .page-gif {
@@ -59,7 +58,6 @@
       <a href="research.html" class="active">Research</a>
       <a href="visualarts.html">Visual Arts</a>
       <a href="internet.html">Internet</a>
-      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
@@ -76,14 +74,70 @@
   <section>
     <h2>Overview</h2>
     <p>
-      My primary neuroscience interests are the study of attention, thalamo-cortical dynamics, sensory perception, and consciousness.
+      I am a Neuroscientist interested in attention, thalamo-cortical dynamics, consciousness, and how to study complex physical systems. 
     </p>
+    <p>
+      The primary focus of my research is two pronged: 
+    </p>
+    <p class="indented">
+      1. How neural activity is integrated across different scales—from populations to single neurons, 
+      and what tools to use to capture this information.
+    </p>
+    <p class="indented">
+      2. The incorporation of sensory evidence with flexible cognitive processes; Cycles of action and perception indexed 
+      at the level of rhythmic network dynamics. 
+    </p>
+    <p>
+      I am currently a postdoctoral fellow in 
+      <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a> 
+      at the University of Texas Health Science Center in Houston, TX, USA, where I completed my PhD in 2025. 
+    </p>
+  </section>
+
     <div class="divider"></div>
+
+  <section>
+    <h2>Future Research</h2>
+    <p>
+      I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
+       in my ongoing and future research. I am drawn to theories of how 
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and 
+      <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
+       processing in the brain. 
+      As such, I am very interested in studying neural dynamics across 
+      altered states of consciousness, be that natural sleep, anaesthetized states, 
+      or disorders of consciousness. 
+    </p>
+    <p>
+      I am very interested in how the energetic constraints of neural design shape neural dynamics. 
+      I am especially interested in network models incorporating 
+      <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
+       reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support 
+      flexible cognition across brain states. 
+    </p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <h2>Publications</h2>
+    <p>
+      <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en">Google Scholar</a>
+    </p>
+    <p>
+      Scientific communication is important to me, and I have been working on developing this skillset volunteering 
+      for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
+      and discoveries 
+      <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
+    </p>
+  </section>
+
+  <div class="divider"></div>
 
   <section>
     <h2>Experimental Research</h2>
     <p>
-      Throughout my PhD and postdoctoral studies, I have examined the interplay between specialization and 
+      Throughout my PhD and postdoctoral resarch, I have examined the interplay between specialization and 
       generalizability in population-level neural activity that support flexible cognition. 
       I have probed these questions through the lens of intracranial EEG (iEEG) recordings in humans (sEEG, SDE, and single-unit recordings),
       scalp EEG, cortical stimulation mapping, as well as DBS and RNS recordings. 
@@ -94,7 +148,7 @@
       I have validated several assumptions about the locality of iEEG signals and clarified how
       electrode type, referencing scheme, and filtered frequency influence electrode listening zone 
       <a href="https://www.eneuro.org/content/9/2/ENEURO.0492-21.2022">McCarty et al., 2022</a>. These findings
-      experimentally validate analyic methods used to ascribe recorded neural activity to cortical space. 
+      experimentally validate analytic methods used to ascribe recorded neural activity to cortical space. 
     </p>
     <p>
       Using a combination of ECoG and cortical stimulation mapping during an awake craniotomy, I revealed a
@@ -107,13 +161,13 @@
     </p>
     <p>
       My current research investigates flexible attention, or the prioritization of relevance information
-      and filtering out of distractors. (McCarty et al., in prep). Using iEEG data collected from 31 subjects,
-      I have implemented analyses of local BGA dynamics and inter-areal directed communication to reveal
-      how high-order sensory regions within the ventral occipitotemporal cortex support flexible attention to 
-      visual objects. These findings provide novel insight into <b>how dynamics within high-order sensory and 
+      and filtering out of distractors. (McCarty et al., in prep). These findings provide novel insight 
+      into <b>how dynamics within high-order sensory and 
       frontoparietal attentional networks support adaptive, goal-directed behavior</b>.
     </p>
-    <div class="divider"></div>
+  </section>
+
+  <div class="divider"></div>
 
   <section>
     <h2>Theoretical Research</h2>
@@ -124,7 +178,7 @@
       I developed a theoretical project linking first-person reports and clinical findings with basic neuroanatomy and physiology
       to better understand stereotypies, or semi-voluntary repetitive movements that are a prominent clinical feature of autism spectrum disorder. 
       I generated novel testable hypotheses that <b>stereotypies improve sensory processing and attention by regulating brain rhythms, either directly from
-       the rhythmic motor command, or via rhythmic sensory feedback generated by the movements </b>
+       the rhythmic motor command, or via rhythmic sensory feedback generated by the movements</b>
       <a href="https://www.sciencedirect.com/science/article/pii/S1071909121000255">(McCarty & Brumback, 2021)</a>. This project exemplifies 
       my interest in interdisciplinary and theoretical work, integrating research from different methodologies and model systems to better understand a common topic. 
     </p>
@@ -134,44 +188,6 @@
       there is a risk of erroneously conflating correlation with true representational clarity. <b>The central question remains as to whether different neural correlates
       reflect genuine coding mechanisms the brain uses to represent information</b>. 
     </p>
-  </section>
-
-  <div class="divider"></div>
-
-  <section>
-    <h2>Future Research</h2>
-    <p>
-      I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
-       in my ongoing and future research. I am drawn to theories of how 
-      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/"> neural synchrony</a> and 
-      <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/"> rhythmic dynamics</a> coordinate increased attention and conscious
-       processing in the brain. This relates to my longstanding interest in thalamo-cortical dynamics. 
-      As such, I am very interested in studying neural dynamics across 
-      altered states of consciousness, be that natural sleep, anaesthetized states, 
-      or disorders of consciousness. 
-    </p>
-    <p>
-      This interest extends to predictive processing frameworks, especially when considering how the energetic constraints of neural design may shape neural dynamics. 
-      I am especially interested in network models incorporating 
-      <a href="https://www.nature.com/articles/s41583-023-00756-z"> thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
-       reaches awareness in consicous and unconscious states. Overall, I am interested in understanding how emergent network dynamics support 
-      flexible cognition across brain states. 
-    </p>
-  </section>
-
-  <div class="divider"></div>
-
-  <section>
-    <h2>Publications</h2>
-    <p>
-      <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en"> Google Scholar</a>
-    </p>
-    <p>
-        Scientific communication is important to me, and I have been working on developing this skillset volunteer 
-  writing for Brainpost, and developing article summaries and topic overviews covering recent neuroscience publications
-  and discoveries 
-      <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a> .
-</p>  
   </section>
 
   <footer>&copy; 2026 McCarty</footer>
