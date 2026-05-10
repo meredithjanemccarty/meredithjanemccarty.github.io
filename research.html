@@ -10,13 +10,13 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
       --black: #111111; --mid: #555555; --light: #aaaaaa;
-      --accent: #3a7fc1; --bg: #ffffff; --border: #e8e8e8;
+      --accent: #3a7fc1; --bg: #f2f2f2; --border: #e8e8e8;
     }
     body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--black); min-height: 100vh; }
     nav {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.5rem 3rem; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; background: rgba(255,255,255,0.92);
+      position: sticky; top: 0; background: rgba(242,242,242,0.92);
       backdrop-filter: blur(8px); z-index: 100;
     }
     nav a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
@@ -47,6 +47,65 @@
     section p a { color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s; }
     section p a:hover { border-color: var(--accent); }
 
+    /* Change 1: Overview box */
+    .overview-box {
+      border: 1.5px solid #cccccc;
+      border-radius: 6px;
+      padding: 1.5rem 1.8rem;
+      margin-top: 1rem;
+    }
+    .overview-box p { margin-bottom: 0; }
+    .overview-list {
+      list-style: decimal;
+      padding-left: 1.5rem;
+      margin-top: 0.75rem;
+    }
+    .overview-list li {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #333;
+      font-weight: 300;
+      margin-bottom: 0.5rem;
+      padding-left: 0.3rem;
+    }
+    .overview-list li:last-child { margin-bottom: 0; }
+
+    /* Change 2: Two-column layout for Future Research + Publications */
+    .two-col-section {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .two-col-section .col h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .two-col-section .col p {
+      font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 1rem; font-weight: 300;
+    }
+    .two-col-section .col p a {
+      color: var(--accent); font-weight: 500; text-decoration: none;
+      border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s;
+    }
+    .two-col-section .col p a:hover { border-color: var(--accent); }
+
+    @media (max-width: 620px) {
+      .two-col-section {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 0;
+      }
+      .two-col-section .col {
+        padding: 2rem 1.5rem;
+        border-top: 1px solid var(--border);
+      }
+    }
+
     footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--light); letter-spacing: 0.04em; }
     @media (max-width: 580px) { nav { padding: 1.2rem 1.5rem; } header { flex-direction: column; padding: 3rem 1.5rem 2rem; } section { padding: 2rem 1.5rem; } }
   </style>
@@ -71,66 +130,69 @@
 
   <div class="divider"></div>
 
+  <!-- Change 1: Overview in a gray-outlined box with indented numbered list -->
   <section>
     <h2>Overview</h2>
-    <p>
-      I am a Neuroscientist interested in attention, thalamo-cortical dynamics, consciousness, and how to study complex physical systems. 
-    </p>
-    <p>
-      The primary focus of my research is two pronged: 
-    </p>
-    <p class="indented">
-      1. How neural activity is integrated across different scales—from populations to single neurons, 
-      and what tools to use to capture this information.
-    </p>
-    <p class="indented">
-      2. The incorporation of sensory evidence with flexible cognitive processes; Cycles of action and perception indexed 
-      at the level of rhythmic network dynamics. 
-    </p>
-    <p>
-      I am currently a postdoctoral fellow in 
-      <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a> 
-      at the University of Texas Health Science Center in Houston, TX, USA, where I completed my PhD in 2025. 
-    </p>
-  </section>
-
-    <div class="divider"></div>
-
-  <section>
-    <h2>Future Research</h2>
-    <p>
-      I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
-       in my ongoing and future research. I am drawn to theories of how 
-      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and 
-      <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
-       processing in the brain. 
-      As such, I am very interested in studying neural dynamics across 
-      altered states of consciousness, be that natural sleep, anaesthetized states, 
-      or disorders of consciousness. 
-    </p>
-    <p>
-      I am very interested in how the energetic constraints of neural design shape neural dynamics. 
-      I am especially interested in network models incorporating 
-      <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
-       reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support 
-      flexible cognition across brain states. 
-    </p>
+    <div class="overview-box">
+      <p>
+        I am a Neuroscientist interested in attention, thalamo-cortical dynamics, consciousness, and how to study complex physical systems.
+      </p>
+      <p style="margin-top: 0.75rem; margin-bottom: 0.25rem;">The primary focus of my research is two pronged:</p>
+      <ol class="overview-list">
+        <li>
+          How neural activity is integrated across different scales—from populations to single neurons,
+          and what tools to use to capture this information.
+        </li>
+        <li>
+          The incorporation of sensory evidence with flexible cognitive processes; Cycles of action and perception indexed
+          at the level of rhythmic network dynamics.
+        </li>
+      </ol>
+      <p style="margin-top: 0.75rem; margin-bottom: 0;">
+        I am currently a postdoctoral fellow in
+        <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a>
+        at the University of Texas Health Science Center in Houston, TX, USA, where I completed my PhD in 2025.
+      </p>
+    </div>
   </section>
 
   <div class="divider"></div>
 
-  <section>
-    <h2>Publications</h2>
-    <p>
-      <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en">Google Scholar</a>
-    </p>
-    <p>
-      Scientific communication is important to me, and I have been working on developing this skillset volunteering 
-      for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
-      and discoveries 
-      <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
-    </p>
-  </section>
+  <!-- Change 2: Future Research + Publications side by side -->
+  <div class="two-col-section">
+    <div class="col">
+      <h2>Future Research</h2>
+      <p>
+        I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
+        in my ongoing and future research. I am drawn to theories of how
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and
+        <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
+        processing in the brain.
+        As such, I am very interested in studying neural dynamics across
+        altered states of consciousness, be that natural sleep, anaesthetized states,
+        or disorders of consciousness.
+      </p>
+      <p>
+        I am very interested in how the energetic constraints of neural design shape neural dynamics.
+        I am especially interested in network models incorporating
+        <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
+        reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support
+        flexible cognition across brain states.
+      </p>
+    </div>
+    <div class="col">
+      <h2>Publications</h2>
+      <p>
+        <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en">Google Scholar</a>
+      </p>
+      <p>
+        Scientific communication is important to me, and I have been working on developing this skillset volunteering
+        for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
+        and discoveries
+        <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
+      </p>
+    </div>
+  </div>
 
   <div class="divider"></div>
 
