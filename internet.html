@@ -3,235 +3,310 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Meredith J McCarty</title>
+  <title>Internet Facet — McCarty</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --black: #111111;
-      --mid: #555555;
-      --light: #aaaaaa;
-      --accent: #c8a96e;
-      --bg: #ffffff;
-      --border: #e8e8e8;
+      --bg: #080c14; --text: #c8d8e8; --dim: #607080;
+      --accent: #4ab8e8; --border: rgba(100,160,210,0.15);
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; align-items: center; }
+
+    /* halo of light at center, dark vignette at edges */
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 35%, rgba(74,184,232,0.09) 0%, transparent 70%),
+        radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none; z-index: 0;
     }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--black);
-      min-height: 100vh;
-    }
-
-    /* ── NAV ── */
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.5rem 3rem;
+      width: 100%; display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 3rem; position: relative; z-index: 10;
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(8px);
-      z-index: 100;
+      background: rgba(8,12,20,0.8); backdrop-filter: blur(8px);
+    }
+    nav a { font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--dim); transition: color 0.25s; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    nav .back::before { content: '← '; }
+    nav .nav-links { display: flex; gap: 2rem; }
+
+    main {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; padding: 5rem 2rem 4rem;
+      max-width: 720px; width: 100%;
     }
 
-    .nav-name {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--black);
-      text-decoration: none;
+    .glow-ring {
+      width: 200px; height: 200px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(60,180,255,0.2) 0%, transparent 70%);
+      display: flex; align-items: center; justify-content: center;
+      animation: breathe 4s ease-in-out infinite;
+      margin-bottom: 2.5rem;
+    }
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.12); opacity: 0.7; }
+    }
+    .candle-img { image-rendering: pixelated; width: 100px; height: auto; filter: drop-shadow(0 0 20px rgba(60,180,255,0.65)); }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; font-style: italic;
+      color: var(--text); margin-bottom: 0.8rem;
+      opacity: 0; animation: fadeUp 1s ease 0.3s forwards;
+    }
+    .subtitle {
+      font-size: 0.9rem; color: var(--dim); letter-spacing: 0.06em; line-height: 1.9;
+      margin-bottom: 1rem; max-width: 500px;
+      opacity: 0; animation: fadeUp 1s ease 0.55s forwards;
+    }
+    .subtitle:last-of-type { margin-bottom: 3rem; }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+    .content {
+      width: 100%; border-top: 1px solid var(--border);
+      padding-top: 2.5rem; text-align: left;
+      opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
     }
 
-    .nav-links {
+    /* ── ROCK GRID ── */
+    .rock-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 0.5rem;
+    }
+
+    .rock-item {
       display: flex;
-      gap: 2rem;
-      align-items: center;
-    }
-
-    nav a {
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    nav a:hover { color: var(--black); }
-    nav a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
-
-    /* ── HERO: IMAGE LEFT, TEXT RIGHT ── */
-    .hero-flex {
-      width: 820px;
-      max-width: 100%;
-      margin: 0 auto;
-      padding: 3.5rem 2rem;
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: flex-start;
-      gap: 1.75rem;
-    }
-
-    .hero-flex .hero-image {
-      flex: 0 0 300px;
-      width: 300px;
-    }
-
-    .hero-flex .hero-image img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    .welcome-text {
-      flex: 1 1 auto;
-      min-width: 0;
-    }
-
-    .welcome-text p {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 300;
-      color: #333;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-      text-align: left;
-    }
-
-    .welcome-text p:last-child { margin-bottom: 0; }
-
-    .welcome-text p.prong {
-      font-style: italic;
-      margin-left: 1.5rem;
-    }
-
-    .welcome-text a {
-      color: var(--black);
-      font-weight: 500;
-      border-bottom: 1px solid var(--accent);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .welcome-text a:hover { color: var(--accent); }
-
-    /* ── SOCIAL / EXTERNAL LINKS ── */
-    .social-links {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-top: 1.25rem;
-    }
-
-    .social-links a {
-      display: inline-flex;
       align-items: center;
       justify-content: center;
-      opacity: 0.75;
-      transition: opacity 0.2s;
+      padding: 28px 8px;
     }
 
-    .social-links a:hover { opacity: 1; }
+    .rock-item.label-left  { flex-direction: row; }
+    .rock-item.label-right { flex-direction: row-reverse; }
+    .rock-item.centered    { grid-column: 1 / -1; justify-content: center; }
+    .rock-item.centered .rock-label-wrap { align-items: flex-end; }
 
-    .social-links img {
-      width: 22px;
-      height: 22px;
+    .rock-link { display: block; flex-shrink: 0; text-decoration: none; }
+
+    /* no border-radius, no object-fit — PNG transparency shows naturally */
+    .rock-img {
+      width: 110px;
+      height: auto;
+      cursor: pointer;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      filter: brightness(0.9);
       display: block;
     }
 
-    /* ── DIVIDER ── */
-    .divider {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      border-top: 1px solid var(--border);
+    .rock-item:hover .rock-img {
+      transform: scale(1.08);
+      filter: brightness(1.15);
     }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.8rem;
-      color: var(--light);
-      letter-spacing: 0.04em;
+    /* label + arrow hidden by default, revealed on hover */
+    .rock-label-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      max-width: 140px;
+      margin: 0 10px;
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      pointer-events: none;
     }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 520px) {
-      .hero-flex {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 1.75rem;
-      }
-      .hero-flex .hero-image {
-        flex: none;
-        max-width: 220px;
-        margin: 0 auto;
-      }
-      .welcome-text p { text-align: left; }
+    .rock-item.label-right .rock-label-wrap {
+      align-items: flex-start;
+      transform: translateX(8px);
     }
+
+    .rock-item.centered .rock-label-wrap {
+      transform: translateX(-8px);
+    }
+
+    .rock-item:hover .rock-label-wrap {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .rock-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px;
+      font-style: italic;
+      color: rgba(200,216,232,0.75);
+      line-height: 1.45;
+      text-align: right;
+      margin-bottom: 5px;
+    }
+
+    .rock-item.label-right .rock-label { text-align: left; }
+    .rock-item.centered .rock-label    { text-align: right; }
+
+    .connector { display: flex; align-items: center; }
+    .rock-item.label-right .connector { flex-direction: row-reverse; }
+
+    .arrow-line {
+      width: 22px;
+      height: 1px;
+      background: rgba(200,216,232,0.35);
+    }
+    .arrow-tip {
+      width: 0; height: 0;
+      border-top: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-left: 5px solid rgba(200,216,232,0.35);
+    }
+    .arrow-tip-left {
+      border-left: none;
+      border-right: 5px solid rgba(200,216,232,0.35);
+    }
+
+    footer { position: relative; z-index: 1; margin-top: auto; padding: 2rem; font-size: 0.78rem; color: rgba(96,112,128,0.5); letter-spacing: 0.04em; }
 
     @media (max-width: 580px) {
       nav { padding: 1.2rem 1.5rem; }
-      .hero-flex { padding: 2.5rem 1.5rem; }
+      nav .nav-links { gap: 1rem; }
+      main { padding: 3rem 1.5rem; }
+      .rock-img { width: 80px; }
+      .rock-label-wrap { max-width: 110px; }
     }
   </style>
 </head>
 <body>
-
-  <!-- ── NAVIGATION ── -->
   <nav>
-    <a href="index.html" class="nav-name">Meredith J McCarty</a>
+    <a href="index.html" class="back">Home</a>
     <div class="nav-links">
       <a href="research.html">Research</a>
       <a href="visualarts.html">Visual Arts</a>
-      <a href="internet.html">Internet</a>
+      <a href="internet.html" class="active">Internet</a>
       <a href="contact.html">Contact</a>
     </div>
   </nav>
 
-  <!-- ── HERO: IMAGE LEFT, TEXT RIGHT ── -->
-  <div class="hero-flex">
-    <div class="hero-image">
-      <img src="meredith.png" alt="Featured image" />
+  <main>
+    <div class="glow-ring">
+      <img src="internet_candle.gif" alt="Flickering blue pixel candle" class="candle-img" />
     </div>
-    <div class="welcome-text">
-      <p>Welcome to my website.</p>
-      <p>I am a neuroscientist, researching the complex organ that is the brain.</p>
-      <p>The focus of my <a href="research.html">research</a> is two pronged:</p>
-      <p class="prong">How does the brain, with its inherent energetic limitations, selectively attend to relevant sensory information?</p>
-      <p class="prong">What analytical and physical tools provide relevant information to answer different neuroscientific questions?</p>
-      <p>I am currently a postdoctoral fellow in
-        <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a>
-        at UT Health Science Center in Houston, Texas.</p>
-      <p>I am also interested in creative pursuits outside of science, and especially enjoy <a href="visualarts.html">the visual arts</a>.</p>
 
-      <div class="social-links">
-        <a href="https://orcid.org/0000-0002-4632-1403" target="_blank" rel="noopener" aria-label="ORCID profile">
-          <img src="https://orcid.org/sites/default/files/images/orcid_128x128.png" alt="ORCID" />
-        </a>
-        <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar profile">
-          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg" alt="Google Scholar" />
-        </a>
+    <h1>Internet Facet</h1>
+    <p class="subtitle">For being a series of tubes, the internet sure is interesting.</p>
+    <p class="subtitle">This is my corner of the internet. A collection of websites I have been enjoying.</p>
+    <p class="subtitle">Prone to intermittent updating... </p>
+    
+    <div class="content">
+      <div class="rock-grid">
+
+        <!-- 1 – Brent Wong -->
+        <div class="rock-item label-left">
+          <div class="rock-label-wrap">
+            <div class="rock-label">captures the liminal surreal feeling</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://www.brentwong-painter.com/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock1.png" alt="Brent Wong the Painter" />
+          </a>
+        </div>
+
+        <!-- 2 – earth.nullschool -->
+        <div class="rock-item label-right">
+          <div class="rock-label-wrap">
+            <div class="rock-label">incredible earth phenomenon visualizer</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip arrow-tip-left"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://earth.nullschool.net/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock2.png" alt="earth.nullschool" />
+          </a>
+        </div>
+
+        <!-- 3 – Ian Fraser -->
+        <div class="rock-item label-left">
+          <div class="rock-label-wrap">
+            <div class="rock-label">a fascinating glimpse into a naturalist's mind</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://ianfrasertalkingnaturally.blogspot.com/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock3.png" alt="Ian Fraser, talking naturally" />
+          </a>
+        </div>
+
+        <!-- 4 – Window Swap -->
+        <div class="rock-item label-right">
+          <div class="rock-label-wrap">
+            <div class="rock-label">little glimpses from around the world</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip arrow-tip-left"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://www.window-swap.com/Window" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock4.png" alt="Window Swap" />
+          </a>
+        </div>
+
+        <!-- 5 – Atlas Obscura -->
+        <div class="rock-item label-left">
+          <div class="rock-label-wrap">
+            <div class="rock-label">best for off-the-beaten-path discoveries</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://www.atlasobscura.com/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock5.png" alt="Atlas Obscura" />
+          </a>
+        </div>
+
+        <!-- 6 – Cloud Hiker -->
+        <div class="rock-item label-right">
+          <div class="rock-label-wrap">
+            <div class="rock-label">explore the internet thematically</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip arrow-tip-left"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://cloudhiker.net/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock6.png" alt="Cloud Hiker" />
+          </a>
+        </div>
+
+        <!-- 7 – Rotating Sandwiches (centered) -->
+        <div class="rock-item centered">
+          <div class="rock-label-wrap">
+            <div class="rock-label">that's it!</div>
+            <div class="connector">
+              <div class="arrow-line"></div>
+              <div class="arrow-tip"></div>
+            </div>
+          </div>
+          <a class="rock-link" href="https://rotatingsandwiches.com/" target="_blank" rel="noopener">
+            <img class="rock-img" src="rock7.png" alt="Rotating Sandwiches" />
+          </a>
+        </div>
+
       </div>
     </div>
-  </div>
+  </main>
 
-  <div class="divider"></div>
-
-  <footer>
-    2026 Meredith J McCarty &mdash; All rights reserved
-  </footer>
-
+  <footer>&copy; 2026 McCarty</footer>
 </body>
 </html>
