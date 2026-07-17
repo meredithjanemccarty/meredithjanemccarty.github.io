@@ -98,12 +98,12 @@
     }
 
     .welcome-text p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--black);
-      line-height: 1.55;
-      margin-bottom: 0.75rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 1rem;
       text-align: left;
     }
 
@@ -123,6 +123,30 @@
     }
 
     .welcome-text a:hover { color: var(--accent); }
+
+    /* ── SOCIAL / EXTERNAL LINKS ── */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+
+    .social-links a:hover { opacity: 1; }
+
+    .social-links img {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
 
     /* ── DIVIDER ── */
     .divider {
@@ -183,13 +207,22 @@
     <div class="welcome-text">
       <p>Welcome to my website.</p>
       <p>I am a neuroscientist, researching the complex organ that is the brain.</p>
-      <p> The focus of my <a href="research.html">research</a> is two pronged:</p>
+      <p>The focus of my <a href="research.html">research</a> is two pronged:</p>
       <p class="prong">How does the brain, with its inherent energetic limitations, selectively attend to relevant sensory information?</p>
       <p class="prong">What analytical and physical tools provide relevant information to answer different neuroscientific questions?</p>
       <p>I am currently a postdoctoral fellow in
         <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a>
-       at UT Health Science Center in Houston, Texas. 
+        at UT Health Science Center in Houston, Texas.</p>
       <p>I am also interested in creative pursuits outside of science, and especially enjoy <a href="visualarts.html">the visual arts</a>.</p>
+
+      <div class="social-links">
+        <a href="https://orcid.org/0000-0002-4632-1403" target="_blank" rel="noopener" aria-label="ORCID profile">
+          <img src="https://orcid.org/sites/default/files/images/orcid_128x128.png" alt="ORCID" />
+        </a>
+        <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar profile">
+          <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg" alt="Google Scholar" />
+        </a>
+      </div>
     </div>
   </div>
 
