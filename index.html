@@ -70,18 +70,19 @@
 
     /* ── HERO: IMAGE LEFT, TEXT RIGHT ── */
     .hero-flex {
-      max-width: 900px;
+      width: 640px;
+      max-width: 100%;
       margin: 0 auto;
       padding: 3.5rem 2rem;
       display: flex;
       flex-wrap: nowrap;
-      align-items: center;
-      gap: 2.5rem;
+      align-items: flex-start;
+      gap: 1.75rem;
     }
 
     .hero-flex .hero-image {
-      flex: 0 0 220px;
-      max-width: 220px;
+      flex: 0 0 140px;
+      width: 140px;
     }
 
     .hero-flex .hero-image img {
@@ -98,11 +99,11 @@
 
     .welcome-text p {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.25rem;
+      font-size: 0.95rem;
       font-weight: 500;
       color: var(--black);
-      line-height: 1.6;
-      margin-bottom: 1rem;
+      line-height: 1.55;
+      margin-bottom: 0.75rem;
       text-align: left;
     }
 
