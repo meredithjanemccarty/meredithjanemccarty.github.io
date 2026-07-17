@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — Meredith J McCarty</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --mid: #555555;
+      --light: #aaaaaa;
+      --accent: #c8a96e;
+      --bg: #ffffff;
+      --border: #e8e8e8;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    nav a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--black); }
+    nav a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+
+    /* ── HERO: IMAGE LEFT, TEXT RIGHT ── */
+    .hero-flex {
+      width: 820px;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 1.75rem;
+    }
+
+    .hero-flex .hero-image {
+      flex: 0 0 300px;
+      width: 300px;
+    }
+
+    .hero-flex .hero-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .welcome-text {
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
+    .welcome-text p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: #333;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+
+    .welcome-text p:last-child { margin-bottom: 0; }
+
+    .welcome-text a {
+      color: var(--black);
+      font-weight: 500;
+      border-bottom: 1px solid var(--accent);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .welcome-text a:hover { color: var(--accent); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+      color: var(--light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 520px) {
+      .hero-flex {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.75rem;
+      }
+      .hero-flex .hero-image {
+        flex: none;
+        max-width: 220px;
+        margin: 0 auto;
+      }
+      .welcome-text p { text-align: left; }
+    }
+
+    @media (max-width: 580px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .hero-flex { padding: 2.5rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <a href="index.html" class="nav-name">Meredith J McCarty</a>
+    <div class="nav-links">
+      <a href="research.html">Research</a>
+      <a href="visualarts.html">Visual Arts</a>
+      <a href="internet.html">Internet</a>
+      <a href="contact.html" class="active">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO: IMAGE LEFT, TEXT RIGHT ── -->
+  <div class="hero-flex">
+    <div class="hero-image">
+      <img src="2.png" alt="Featured image" />
+    </div>
+    <div class="welcome-text">
+      <p>Reach out to me via email:</p>
+      <p><a href="mailto:meredithjanemccarty@gmail.com">meredithjanemccarty@gmail.com</a></p>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <footer>
+    2026 Meredith J McCarty &mdash; All rights reserved
+  </footer>
+
+</body>
+</html>
