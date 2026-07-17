@@ -46,6 +46,27 @@
     section p a { color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s; }
     section p a:hover { border-color: var(--accent); }
 
+    /* ── SOCIAL / EXTERNAL LINKS ── */
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.75;
+      transition: opacity 0.2s;
+    }
+    .social-links a:hover { opacity: 1; }
+    .social-links img {
+      width: 22px;
+      height: 22px;
+      display: block;
+    }
+
     /* ── SUBHEADING: thin rule above, bold text (Dewitt-style) ── */
     .subheading {
       border-top: 1.5px solid var(--black);
@@ -141,7 +162,6 @@
     <img src="magnifier.gif" alt="Rotating magnifying glass" class="page-gif" />
     <div>
       <h1>Scientific Research</h1>
-      <p>Overview of my research interests.</p>
     </div>
   </header>
 
@@ -175,41 +195,47 @@
 
   <div class="divider"></div>
 
-  <!-- Future Research + Publications side by side, rule-and-bold subheadings -->
-  <div class="two-col-section">
-    <div class="col">
-      <div class="subheading">Future Research</div>
-      <p>
-        I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
-        in my ongoing and future research. I am drawn to theories of how
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and
-        <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
-        processing in the brain.
-        As such, I am very interested in studying neural dynamics across brain states, be that attentional conditions, 
-        altered states of consciousness, natural sleep, anaesthetized states,
-        or disorders of consciousness.
-      </p>
-      <p>
-        I am very interested in how the energetic constraints of neural design shape neural dynamics.
-        I am especially interested in network models incorporating
-        <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
-        reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support
-        flexible cognition across brain states, and how cycles of action and perception are indexed at the level of rhythmic network dynamics.
-      </p>
+  <!-- Future Research + Publications, stacked, matching Experimental Research format -->
+  <section>
+    <h2 class="section-label">Future Research</h2>
+
+    <div class="subheading">Attention, awareness, and brain state</div>
+    <p>
+      I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
+      in my ongoing and future research. I am drawn to theories of how
+      <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and
+      <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
+      processing in the brain.
+      As such, I am very interested in studying neural dynamics across brain states, be that attentional conditions, 
+      altered states of consciousness, natural sleep, anaesthetized states,
+      or disorders of consciousness.
+    </p>
+
+    <div class="subheading">Energetic constraints on neural design</div>
+    <p>
+      I am very interested in how the energetic constraints of neural design shape neural dynamics.
+      I am especially interested in network models incorporating
+      <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
+      reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support
+      flexible cognition across brain states, and how cycles of action and perception are indexed at the level of rhythmic network dynamics.
+    </p>
+
+    <div class="subheading">Publications</div>
+    <div class="social-links">
+      <a href="https://orcid.org/0000-0002-4632-1403" target="_blank" rel="noopener" aria-label="ORCID profile">
+        <img src="https://orcid.org/sites/default/files/images/orcid_128x128.png" alt="ORCID" />
+      </a>
+      <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar profile">
+        <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/googlescholar.svg" alt="Google Scholar" />
+      </a>
     </div>
-    <div class="col">
-      <div class="subheading">Publications</div>
-      <p>
-        <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en">Google Scholar</a>
-      </p>
-      <p>
-        Scientific communication is important to me, and I have been working on developing this skillset volunteering
-        for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
-        and discoveries
-        <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
-      </p>
-    </div>
-  </div>
+    <p>
+      Scientific communication is important to me, and I have been working on developing this skillset volunteering
+      for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
+      and discoveries
+      <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
+    </p>
+  </section>
 
   <div class="divider"></div>
 
