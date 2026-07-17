@@ -3,27 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Scientific Research — McCarty</title>
+  <title>Visual Arts — McCarty</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --black: #111111; --mid: #555555; --light: #aaaaaa;
-      --accent: #3a7fc1; --bg: #f2f2f2; --border: #e8e8e8;
+      --black: #0e0e0e;
+      --dark: #1a1a1a;
+      --mid: #999999;
+      --light: #666666;
+      --white: #f0ece6;
+      --accent: #c8a96e;
+      --border: rgba(255,255,255,0.08);
     }
-    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--black); min-height: 100vh; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* ── NAV ── */
     nav {
       display: flex; justify-content: space-between; align-items: center;
       padding: 1.5rem 3rem; border-bottom: 1px solid var(--border);
-      position: sticky; top: 0; background: rgba(242,242,242,0.92);
-      backdrop-filter: blur(8px); z-index: 100;
+      position: sticky; top: 0;
+      background: rgba(20,20,20,0.94);
+      backdrop-filter: blur(10px); z-index: 100;
     }
-    nav a { font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color 0.2s; }
-    nav a:hover { color: var(--black); }
+    nav a {
+      font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--mid);
+      text-decoration: none; transition: color 0.2s;
+    }
+    nav a:hover { color: var(--white); }
     nav a.active { color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
     nav .back::before { content: '← '; }
 
+    /* ── HEADER ── */
     header {
       display: flex; align-items: center; justify-content: center; gap: 2.5rem;
       max-width: 820px; margin: 0 auto; padding: 5rem 2rem 3rem;
@@ -31,254 +51,530 @@
     .page-gif {
       image-rendering: pixelated; width: 100px; height: auto;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 16px rgba(58,127,193,0.35));
+      filter: drop-shadow(0 4px 20px rgba(200,169,110,0.35));
     }
     header h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700;
-      line-height: 1.05; color: var(--black);
+      font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700; line-height: 1.05;
+      color: var(--white);
     }
-    header p { margin-top: 0.7rem; font-size: 1rem; color: var(--mid); font-weight: 300; line-height: 1.7; }
 
     .divider { max-width: 820px; margin: 0 auto; padding: 0 2rem; border-top: 1px solid var(--border); }
-    section { max-width: 820px; margin: 0 auto; padding: 3rem 2rem; }
-    section p { font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 1rem; font-weight: 300; }
-    section p a { color: var(--accent); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s; }
-    section p a:hover { border-color: var(--accent); }
 
-    /* ── SUBHEADING: thin rule above, bold text (Dewitt-style) ── */
-    .subheading {
-      border-top: 1.5px solid var(--black);
-      padding-top: 0.7rem;
-      margin-top: 2.5rem;
-      margin-bottom: 1rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--black);
+    /* ── ALBUMS ── */
+    .albums-section { padding: 0 0 4rem; }
+    .album { width: 100%; border-top: 1px solid var(--border); cursor: pointer; }
+    .album:last-child { border-bottom: 1px solid var(--border); }
+    .album-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.8rem 3rem; transition: background 0.25s;
     }
-    section > .subheading:first-child,
-    .col > .subheading:first-child {
-      margin-top: 0;
-    }
-
-    /* Page-level section label (e.g. "Overview", "Research Themes") kept lighter/smaller than before */
-    .section-label {
+    .album:hover .album-header { background: rgba(255,255,255,0.03); }
+    .album-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
+      font-size: 2rem; font-weight: 600; color: var(--white);
     }
+    .album-meta {
+      font-size: 0.82rem; color: var(--mid);
+      letter-spacing: 0.06em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .album-toggle {
+      font-size: 1.4rem; color: var(--accent);
+      transition: transform 0.3s ease; user-select: none;
+    }
+    .album.open .album-toggle { transform: rotate(45deg); }
+    .album-photos { display: none; padding: 0 3rem 2rem; }
+    .album.open .album-photos { display: block; }
 
-    /* Overview box */
-    .overview-box {
-      border: 1.5px solid #cccccc;
-      border-radius: 6px;
-      padding: 1.5rem 1.8rem;
-      margin-top: 1rem;
-    }
-    .overview-box p { margin-bottom: 0; }
-    .overview-list {
-      list-style: decimal;
-      padding-left: 1.5rem;
-      margin-top: 0.75rem;
-    }
-    .overview-list li {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #333;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-      padding-left: 0.3rem;
-    }
-    .overview-list li:last-child { margin-bottom: 0; }
-
-    /* Two-column layout for Future Research + Publications */
-    .two-col-section {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
+    /* ── COLLECTION TILES ── */
+    .collection-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
     }
-    .two-col-section .col p {
-      font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 1rem; font-weight: 300;
+    .collection-tile {
+      position: relative; aspect-ratio: 3/2;
+      overflow: hidden; cursor: pointer; border-radius: 2px;
     }
-    .two-col-section .col p a {
-      color: var(--accent); font-weight: 500; text-decoration: none;
-      border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s;
+    .collection-tile img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.35s ease, filter 0.35s ease;
     }
-    .two-col-section .col p a:hover { border-color: var(--accent); }
+    .collection-tile:hover img { transform: scale(1.04); filter: brightness(0.45); }
+    .collection-tile .tile-placeholder {
+      width: 100%; height: 100%; background: #2a2a2a;
+      display: flex; align-items: center; justify-content: center;
+      transition: filter 0.35s ease;
+    }
+    .collection-tile:hover .tile-placeholder { filter: brightness(0.45); }
+    .collection-tile .tile-label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.3rem; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;
+    }
+    .collection-tile:hover .tile-label { opacity: 1; }
+    .tile-label-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 2vw, 1.3rem); font-weight: 600;
+      color: var(--white); letter-spacing: 0.04em; text-align: center; padding: 0 0.5rem;
+    }
+    .tile-label-hint {
+      font-size: 0.72rem; color: rgba(240,236,230,0.6);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
 
-    @media (max-width: 620px) {
-      .two-col-section {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 0;
-      }
-      .two-col-section .col {
-        padding: 2rem 1.5rem;
-        border-top: 1px solid var(--border);
-      }
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.95); z-index: 1000;
+      flex-direction: column; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox.active { display: flex; }
+    .lb-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-style: italic;
+      color: rgba(240,236,230,0.5); letter-spacing: 0.06em; margin-bottom: 1.2rem;
+    }
+    .lb-main {
+      position: relative; width: 100%; max-width: 920px;
+      display: flex; align-items: center; justify-content: center; padding: 0 4rem;
+    }
+    .lb-img-wrap {
+      width: 100%; display: flex; align-items: center; justify-content: center; min-height: 55vh;
+    }
+    .lb-img-wrap img {
+      max-width: 100%; max-height: 68vh; object-fit: contain;
+      border-radius: 3px; box-shadow: 0 20px 80px rgba(0,0,0,0.7);
     }
 
-    footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--light); letter-spacing: 0.04em; }
-    @media (max-width: 580px) { nav { padding: 1.2rem 1.5rem; } header { flex-direction: column; padding: 3rem 1.5rem 2rem; } section { padding: 2rem 1.5rem; } }
+    /* video embed in lightbox */
+    .lb-video-wrap {
+      width: 100%; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.8rem;
+    }
+    .lb-video-wrap iframe {
+      width: 100%; max-width: 800px;
+      aspect-ratio: 16/9;
+      border: none; border-radius: 3px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.7);
+    }
+    .lb-video-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-style: italic;
+      color: rgba(240,236,230,0.55); letter-spacing: 0.04em;
+    }
+
+    .lb-placeholder {
+      width: 560px; max-width: 100%; aspect-ratio: 3/2;
+      background: #2a2a2a; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem; color: var(--light); font-style: italic;
+    }
+    .lb-arrow {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: none; border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white); font-size: 1.3rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .lb-arrow:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.45); }
+    .lb-arrow.prev { left: 0; }
+    .lb-arrow.next { right: 0; }
+    .lb-close {
+      position: fixed; top: 1.4rem; right: 1.6rem;
+      background: none; border: none; color: var(--white);
+      font-size: 1.7rem; cursor: pointer; opacity: 0.55;
+      transition: opacity 0.2s; line-height: 1;
+    }
+    .lb-close:hover { opacity: 1; }
+    .lb-counter { margin-top: 1rem; font-size: 0.8rem; color: var(--mid); letter-spacing: 0.08em; }
+    .lb-dots { display: flex; gap: 6px; margin-top: 0.9rem; }
+    .lb-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,0.22); cursor: pointer; transition: background 0.2s;
+    }
+    .lb-dot.active { background: var(--accent); }
+
+    /* ── GEAR ── */
+    .gear-section {
+      display: flex; gap: 3rem; justify-content: center;
+      align-items: flex-start; padding: 3.5rem 3rem 4rem;
+    }
+    .gear-item { display: flex; flex-direction: column; align-items: center; gap: 1rem; max-width: 280px; }
+    .gear-img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover;
+      border-radius: 3px; filter: grayscale(20%); box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .gear-caption { font-size: 0.88rem; color: var(--mid); font-weight: 300; line-height: 1.65; text-align: center; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); text-align: center; padding: 2rem;
+      font-size: 0.8rem; color: var(--light); letter-spacing: 0.04em;
+    }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      nav { padding: 1.2rem 1.5rem; gap: 1rem; flex-wrap: wrap; }
+      nav a { font-size: 0.75rem; letter-spacing: 0.03em; }
+      header { flex-direction: column; padding: 2.5rem 1.5rem 2rem; gap: 1.2rem; }
+      .page-gif { width: 70px; }
+      .album-header { padding: 1.2rem 1.5rem; }
+      .album-title { font-size: 1.5rem; }
+      .album-photos { padding: 0 1.5rem 1.5rem; }
+      .collection-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+      .lb-main { padding: 0 2.8rem; }
+      .lb-arrow { width: 36px; height: 36px; font-size: 1rem; }
+      .lb-img-wrap img { max-height: 55vw; }
+      .gear-section { flex-direction: column; align-items: center; padding: 2.5rem 1.5rem 3rem; gap: 2.5rem; }
+      .gear-item { max-width: 90%; }
+    }
   </style>
 </head>
 <body>
+
   <nav>
     <a href="index.html" class="back">Home</a>
     <div style="display:flex;gap:2rem;">
-      <a href="research.html" class="active">Research</a>
-      <a href="visualarts.html">Visual Arts</a>
+      <a href="research.html">Research</a>
+      <a href="visualarts.html" class="active">Visual Arts</a>
       <a href="internet.html">Internet</a>
     </div>
   </nav>
 
   <header>
-    <img src="magnifier.gif" alt="Rotating magnifying glass" class="page-gif" />
+    <img src="eyeball.gif" alt="Blinking eye" class="page-gif" />
     <div>
-      <h1>Scientific Research</h1>
-      <p>Overview of my research interests.</p>
+      <h1>Visual Arts</h1>
     </div>
   </header>
 
-  <div class="divider"></div>
+  <!-- ── ALBUMS ── -->
+  <div class="albums-section">
 
-  <!-- Overview in a gray-outlined box with indented numbered list -->
-  <section>
-    <h2 class="section-label">Overview</h2>
-    <div class="overview-box">
-      <p>
-        I am a Neuroscientist interested in attention, consciousness, thalamo-cortical dynamics, and how to study complex systems.
-      </p>
-      <p style="margin-top: 0.75rem; margin-bottom: 0.25rem;">The primary focus of my research is two pronged:</p>
-      <ol class="overview-list">
-        <li>
-          How neural activity can be captured using different tools-- and more theoretically, what do 
-          different biophsyical signals provide in terms of mechanistic insight into how the brain encodes information?  
-        </li>
-        <li>
-          How sensory information is flexibly attended based on changing behavioral goals-- How can cortical regions support specialization
-          but also generalizability to adaptively encode relevant information? 
-        </li>
-      </ol>
-      <p style="margin-top: 0.75rem; margin-bottom: 0;">
-        I am currently a postdoctoral fellow in
-        <a href="https://www.tandonlab.org/" target="_blank" rel="noopener">The Tandon Lab</a>
-        at the University of Texas Health Science Center in Houston, TX, USA, where I completed my PhD in 2025.
-      </p>
+    <!-- PHOTOGRAPHY -->
+    <div class="album" onclick="toggleAlbum(this)">
+      <div class="album-header">
+        <span class="album-title">Photography</span>
+        <div class="album-meta">
+          <span>Film</span>
+          <span class="album-toggle">+</span>
+        </div>
+      </div>
+      <div class="album-photos" onclick="event.stopPropagation()">
+        <div class="collection-grid" id="photography-grid"></div>
+      </div>
     </div>
-  </section>
 
-  <div class="divider"></div>
-
-  <!-- Future Research + Publications side by side, rule-and-bold subheadings -->
-  <div class="two-col-section">
-    <div class="col">
-      <div class="subheading">Future Research</div>
-      <p>
-        I view attention to be linked to the subjective experience of conscious awareness, and seek to identify the neural dynamics underlying this process
-        in my ongoing and future research. I am drawn to theories of how
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4605134/">neural synchrony</a> and
-        <a href="https://pubmed.ncbi.nlm.nih.gov/30591373/">rhythmic dynamics</a> coordinate increased attention and conscious
-        processing in the brain.
-        As such, I am very interested in studying neural dynamics across brain states, be that attentional conditions, 
-        altered states of consciousness, natural sleep, anaesthetized states,
-        or disorders of consciousness.
-      </p>
-      <p>
-        I am very interested in how the energetic constraints of neural design shape neural dynamics.
-        I am especially interested in network models incorporating
-        <a href="https://www.nature.com/articles/s41583-023-00756-z">thalamo-cortical dynamics</a>, especially when considering gating mechanisms for what sensory or cognitive information
-        reaches awareness in conscious and unconscious states. Overall, I am interested in understanding how emergent network dynamics support
-        flexible cognition across brain states, and how cycles of action and perception are indexed at the level of rhythmic network dynamics.
-      </p>
+    <!-- COLLAGE -->
+    <div class="album" onclick="toggleAlbum(this)">
+      <div class="album-header">
+        <span class="album-title">Collage</span>
+        <div class="album-meta">
+          <span>Mixed media</span>
+          <span class="album-toggle">+</span>
+        </div>
+      </div>
+      <div class="album-photos" onclick="event.stopPropagation()">
+        <div class="collection-grid" id="collage-grid"></div>
+      </div>
     </div>
-    <div class="col">
-      <div class="subheading">Publications</div>
-      <p>
-        <a href="https://scholar.google.com/citations?user=XgCR-TkAAAAJ&hl=en">Google Scholar</a>
-      </p>
-      <p>
-        Scientific communication is important to me, and I have been working on developing this skillset volunteering
-        for Brainpost, developing article summaries and topic overviews covering recent neuroscience publications
-        and discoveries
-        <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
-      </p>
+
+    <!-- VIDEO -->
+    <div class="album" onclick="toggleAlbum(this)">
+      <div class="album-header">
+        <span class="album-title">Videography</span>
+        <div class="album-meta">
+          <span>Moving image</span>
+          <span class="album-toggle">+</span>
+        </div>
+      </div>
+      <div class="album-photos" onclick="event.stopPropagation()">
+        <div class="collection-grid" id="video-grid"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── LIGHTBOX ── -->
+  <div class="lightbox" id="lightbox">
+    <button class="lb-close" onclick="closeLightbox()">&#x2715;</button>
+    <div class="lb-title" id="lb-title"></div>
+    <div class="lb-main">
+      <button class="lb-arrow prev" onclick="stepLightbox(-1)">&#8592;</button>
+      <div class="lb-img-wrap" id="lb-img-wrap"></div>
+      <button class="lb-arrow next" onclick="stepLightbox(1)">&#8594;</button>
+    </div>
+    <div class="lb-counter" id="lb-counter"></div>
+    <div class="lb-dots" id="lb-dots"></div>
+  </div>
+
+  <!-- ── GEAR ── -->
+  <div class="divider"></div>
+  <div class="gear-section">
+    <div class="gear-item">
+      <img src="camera1.png" alt="Konica Autoreflex T" class="gear-img" />
+      <p class="gear-caption">I primarily shoot on this gorgeous Konica Autoreflex T. I got it in Austin at a Big Medium garage sale in 2017.</p>
+    </div>
+    <div class="gear-item">
+      <img src="minolta.png" alt="Minolta P series" class="gear-img" />
+      <p class="gear-caption">Got this camera from my friend Bryce and its so fun! Minolta P series makes a wonderful point-and-shoot with a cool wide format look.</p>
     </div>
   </div>
 
-  <div class="divider"></div>
+  <footer>&copy; 2026 Meredith J McCarty</footer>
 
-  <section>
-    <h2 class="section-label">Experimental Research</h2>
+  <script>
+    /* ============================================================
+       PHOTOGRAPHY & COLLAGE COLLECTIONS
+       cover  — path to thumbnail shown in the grid
+       folder — subfolder containing gallery images
+       images — filenames inside that folder
+    ============================================================ */
+    const photographyCollections = [
+      {
+        name:   "Textures",
+        cover:  "textures/T17.png",
+        folder: "textures",
+        images: ["1.png","T1.png","T2.png","T3.png","T4.png",
+                 "T5.png","T6.png","T7.png","T8.png",
+                 "T9.png","T10.png","T11.png","T12.png",
+                 "T13.png","T14.png","T15.png","T16.png","T18.png"]
+      },
+      {
+        name:   "Portraits",
+        cover:  "people/P1.png",
+        folder: "people",
+        images: ["P1.png","P2.png","P3.png","P4.png",
+                 "P5.png","P6.png","P7.png","P8.png",
+                 "P9.png","P10.png","P11.png","P12.png",
+                 "P13.png","P14.png","P15.png","P16.png",
+                 "P17.png","P18.png","P19.png","P20.png","P21.png"]
+      },
+      {
+        name:   "Vistas",
+        cover:  "vistas/V5.png",
+        folder: "vistas",
+        images: ["V1.png","V2.png","V3.png","V4.png",
+                 "V5.png","V6.png","V7.png","V8.png",
+                 "V9.png","V10.png"]
+      },
+      {
+        name:   "*landscape*",
+        cover:  "minolta/M6.png",
+        folder: "minolta",
+        images: ["M1.png","M2.png","M3.png","M4.png",
+                 "M5.png","M6.png","M7.png","M8.png",
+                 "M9.png","M10.png","M11.png","M12.png",
+                 "M13.png","M14.png","M15.png","M16.png",
+                 "M17.png","M18.png","M19.png","M20.png",
+                 "M21.png","M22.png","M23.png","M24.png",
+                 "M25.png","M26.png","M27.png"]
+      }
+    ];
 
-    <div class="subheading">Locality and validity of iEEG signals</div>
-    <p>
-      Throughout my PhD and postdoctoral resarch, I have examined the interplay between specialization and 
-      generalizability in population-level neural activity that support flexible cognition. 
-      I have probed these questions through the lens of intracranial EEG (iEEG) recordings in humans (sEEG, SDE, and single-unit recordings),
-      scalp EEG, cortical stimulation mapping, as well as DBS and RNS recordings. 
-    </p>
-    <p>
-      A consistent interest of mine is understanding the limits of tools available to study the brain,
-      and to <b>clarify how neural representations are linked across these spatial scales</b>.
-      I have validated several assumptions about the locality of iEEG signals and clarified how
-      electrode type, referencing scheme, and filtered frequency influence electrode listening zone 
-      <a href="https://www.eneuro.org/content/9/2/ENEURO.0492-21.2022">McCarty et al., 2022</a>. These findings
-      experimentally validate analytic methods used to ascribe recorded neural activity to cortical space. 
-    </p>
+    const collageCollections = [
+      {
+        name:   "Collage",
+        cover:  "collage/Scan 1.png",
+        folder: "collage",
+        images: ["Scan 1.jpg","Scan 2.jpg","Scan 5.jpg","Scan 6.jpg"]
+      },
+    ];
 
-    <div class="subheading">A mosaic of music and language in auditory cortex</div>
-    <p>
-      Using a combination of ECoG and cortical stimulation mapping during an awake craniotomy, we revealed a
-      mosaic of broadband gamma activation (BGA) for music and language within the superior temporal gyrus 
-      <a href="https://www.sciencedirect.com/science/article/pii/S2589004223013007">McCarty et al., 2023</a>. 
-      Beyond ECoG analyses alone, stimulation mapping provided a degree of causal evidence for a mosaic of
-      necessity of different high-order auditory regions in either music or language perception or production. 
-      These findings indicate <b>shared neural resources for language and music comprehension in high-order auditory cortex,
-       alongside domain-specific specialization for their respective structural features</b>. 
-    </p>
+    /* ============================================================
+       VIDEO COLLECTIONS
+       cover  — path to thumbnail shown in the grid
+       videos — array of { title, url } where url is a YouTube link.
+                The embed is extracted automatically.
+    ============================================================ */
+    const videoCollections = [
+      {
+        name:  "Short & Music Videos",
+        cover: "videos/video1.png",
+        videos: [
+          { title: "Music Video; White Denim", url: "https://www.youtube.com/watch?v=ucSVP-Bw7zw" },
+          { title: "Short Film", url: "https://vimeo.com/251604247?fl=pl&fe=vl" },
+          { title: "Music Video; Juniper Berries", url: "https://www.youtube.com/watch?v=2vtOJLxE2QM"},
+        ]
+      },
+      {
+        name:  "Atmospheric Videos",
+        cover: "videos/video4.png",
+        videos: [
+          { title: "Shinrin Yoku", url: "https://www.youtube.com/watch?v=Z2mx6AKmMF0" },
+          { title: "Sand Dunes", url: "https://www.youtube.com/watch?v=0ju7getvUk4"}
+        ]
+      }
+    ];
 
-    <div class="subheading">Flexible, goal-directed attention</div>
-    <p>
-      My current research investigates flexible attention, or the prioritization of relevance information
-      and filtering out of distractors. (McCarty et al., in prep). These findings provide novel insight 
-      into <b>how dynamics within high-order sensory and 
-      frontoparietal networks support adaptive, goal-directed behavior</b>.
-    </p>
-  </section>
+    /* ============================================================
+       BUILD COLLECTION GRIDS
+    ============================================================ */
+    function buildGrid(collections, gridId) {
+      const grid = document.getElementById(gridId);
+      if (!grid) return;
+      collections.forEach(col => {
+        const tile = document.createElement('div');
+        tile.className = 'collection-tile';
+        tile.onclick = () => openLightbox(col);
 
-  <div class="divider"></div>
+        const img = document.createElement('img');
+        img.src = col.cover;
+        img.alt = col.name;
+        img.onerror = function() {
+          const ph = document.createElement('div');
+          ph.className = 'tile-placeholder';
+          tile.replaceChild(ph, img);
+        };
 
-  <section>
-    <h2 class="section-label">Theoretical Research</h2>
+        const label = document.createElement('div');
+        label.className = 'tile-label';
+        label.innerHTML = `
+          <div class="tile-label-name">${col.name}</div>
+          <div class="tile-label-hint">view series →</div>
+        `;
 
-    <div class="subheading">Rhythmic movement and sensory regulation in autism</div>
-    <p>
-      My theoretical research has developed in several directions, alongside my experimental work. 
-      Before beginning my PhD studies, I developed an interest in thalamo-cortical circuitry while working as a 
-      research assistant in the <a href="https://www.brumbacklab.org/">Autism and Neurodevelopment Lab</a>. 
-      I developed a theoretical project linking first-person reports and clinical findings with basic neuroanatomy and physiology
-      to better understand stereotypies, or semi-voluntary repetitive movements that are a prominent clinical feature of autism spectrum disorder. 
-      I generated novel testable hypotheses that <b>stereotypies improve sensory processing and attention by regulating brain rhythms, either directly from
-       the rhythmic motor command, or via rhythmic sensory feedback generated by the movements</b>
-      <a href="https://www.sciencedirect.com/science/article/pii/S1071909121000255">(McCarty & Brumback, 2021)</a>. This project exemplifies 
-      my interest in interdisciplinary and theoretical work, integrating research from different methodologies and model systems to better understand a common topic. 
-    </p>
+        tile.appendChild(img);
+        tile.appendChild(label);
+        grid.appendChild(tile);
+      });
+    }
 
-    <div class="subheading">Linking single-unit and population-level signals</div>
-    <p>
-      I am very interested in developing clear theoretical frameworks for incorporating single-unit human data alongside local field potential recordings 
-      to understand cognitive processes. Without a strong theoretical foundation explaining why neural dynamics should encode information at different scales, 
-      there is a risk of erroneously conflating correlation with true representational clarity. <b>The central question remains as to whether different neural correlates
-      reflect genuine coding mechanisms the brain uses to represent information</b>. 
-    </p>
-  </section>
+    buildGrid(photographyCollections, 'photography-grid');
+    buildGrid(collageCollections,     'collage-grid');
+    buildGrid(videoCollections,       'video-grid');
 
-  <footer>&copy; 2026 McCarty</footer>
+    /* ============================================================
+       LIGHTBOX — handles both images and YouTube videos
+    ============================================================ */
+    let currentItems  = [];   // array of { type: 'image'|'video', ... }
+    let currentIndex  = 0;
+    let currentTitle  = '';
+
+    function youtubeEmbedUrl(watchUrl) {
+  // YouTube
+  const yt = watchUrl.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  if (yt) return `https://www.youtube.com/embed/${yt[1]}?autoplay=1&rel=0`;
+  // Vimeo
+  const vm = watchUrl.match(/vimeo\.com\/(\d+)/);
+  if (vm) return `https://player.vimeo.com/video/${vm[1]}?autoplay=1`;
+  return null;
+}
+
+    function openLightbox(collection) {
+      currentTitle = collection.name;
+
+      if (collection.videos) {
+        // Video collection
+        currentItems = collection.videos.map(v => ({
+          type:     'video',
+          title:    v.title,
+          embedUrl: youtubeEmbedUrl(v.url)
+        }));
+      } else {
+        // Image collection
+        currentItems = collection.images.map(f => ({
+          type: 'image',
+          src:  `${collection.folder}/${f}`,
+          alt:  `${collection.name} — ${f}`
+        }));
+      }
+
+      currentIndex = 0;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      renderLightbox();
+    }
+
+    function closeLightbox() {
+      // Clear iframe src to stop video playback when closing
+      document.getElementById('lb-img-wrap').innerHTML = '';
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function stepLightbox(dir) {
+      currentIndex = (currentIndex + dir + currentItems.length) % currentItems.length;
+      renderLightbox();
+    }
+
+    function renderLightbox() {
+      const item    = currentItems[currentIndex];
+      const wrap    = document.getElementById('lb-img-wrap');
+      const counter = document.getElementById('lb-counter');
+      const dots    = document.getElementById('lb-dots');
+      const title   = document.getElementById('lb-title');
+
+      title.textContent = currentTitle;
+      wrap.innerHTML = '';
+
+      if (item.type === 'video') {
+        // Render YouTube embed
+        const videoWrap = document.createElement('div');
+        videoWrap.className = 'lb-video-wrap';
+
+        if (item.embedUrl) {
+          const iframe = document.createElement('iframe');
+          iframe.src = item.embedUrl;
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          videoWrap.appendChild(iframe);
+        } else {
+          videoWrap.innerHTML = `<div class="lb-placeholder">Video unavailable</div>`;
+        }
+
+        if (item.title) {
+          const vtitle = document.createElement('div');
+          vtitle.className = 'lb-video-title';
+          vtitle.textContent = item.title;
+          videoWrap.appendChild(vtitle);
+        }
+
+        wrap.appendChild(videoWrap);
+      } else {
+        // Render image
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.alt;
+        img.onerror = () => {
+          wrap.innerHTML = `<div class="lb-placeholder">${item.alt}</div>`;
+        };
+        wrap.appendChild(img);
+      }
+
+      counter.textContent = `${currentIndex + 1} / ${currentItems.length}`;
+
+      dots.innerHTML = '';
+      if (currentItems.length <= 14) {
+        currentItems.forEach((_, i) => {
+          const d = document.createElement('div');
+          d.className = 'lb-dot' + (i === currentIndex ? ' active' : '');
+          d.onclick = () => { currentIndex = i; renderLightbox(); };
+          dots.appendChild(d);
+        });
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('active')) return;
+      if (e.key === 'ArrowRight') stepLightbox(1);
+      if (e.key === 'ArrowLeft')  stepLightbox(-1);
+      if (e.key === 'Escape')     closeLightbox();
+    });
+
+    document.getElementById('lightbox').addEventListener('click', function(e) {
+      if (e.target === this) closeLightbox();
+    });
+
+    /* ============================================================
+       ALBUM TOGGLE
+    ============================================================ */
+    function toggleAlbum(el) { el.classList.toggle('open'); }
+  </script>
+
 </body>
 </html>
