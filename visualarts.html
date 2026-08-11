@@ -248,9 +248,6 @@
 
   <header>
     <img src="eyeball.gif" alt="Blinking eye" class="page-gif" />
-    <div>
-      <h1>Visual Arts</h1>
-    </div>
   </header>
 
   <!-- ── ALBUMS ── -->
@@ -317,11 +314,11 @@
   <div class="divider"></div>
   <div class="gear-section">
     <div class="gear-item">
-      <img src="camera1.png" alt="Konica Autoreflex T" class="gear-img" />
+      <img src="camera1.png" alt="Konica Autoreflex T" class="gear-img" loading="lazy" />
       <p class="gear-caption">I primarily shoot on this gorgeous Konica Autoreflex T. I got it in Austin at a Big Medium garage sale in 2017.</p>
     </div>
     <div class="gear-item">
-      <img src="minolta.png" alt="Minolta P series" class="gear-img" />
+      <img src="minolta.png" alt="Minolta P series" class="gear-img" loading="lazy" />
       <p class="gear-caption">Got this camera from my friend Bryce and its so fun! Minolta P series makes a wonderful point-and-shoot with a cool wide format look.</p>
     </div>
   </div>
@@ -426,6 +423,7 @@
         const img = document.createElement('img');
         img.src = col.cover;
         img.alt = col.name;
+        img.loading = 'lazy';
         img.onerror = function() {
           const ph = document.createElement('div');
           ph.className = 'tile-placeholder';
@@ -541,6 +539,7 @@
         const img = document.createElement('img');
         img.src = item.src;
         img.alt = item.alt;
+        img.loading = 'lazy';
         img.onerror = () => {
           wrap.innerHTML = `<div class="lb-placeholder">${item.alt}</div>`;
         };
