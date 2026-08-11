@@ -98,51 +98,8 @@
       padding: 1.5rem 1.8rem;
       margin-top: 1rem;
     }
-    .overview-box p { margin-bottom: 0; }
-    .overview-list {
-      list-style: decimal;
-      padding-left: 1.5rem;
-      margin-top: 0.75rem;
-    }
-    .overview-list li {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #333;
-      font-weight: 300;
-      margin-bottom: 0.5rem;
-      padding-left: 0.3rem;
-    }
-    .overview-list li:last-child { margin-bottom: 0; }
-
-    /* Two-column layout for Future Research + Publications */
-    .two-col-section {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 3rem 2rem;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-    }
-    .two-col-section .col p {
-      font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 1rem; font-weight: 300;
-    }
-    .two-col-section .col p a {
-      color: var(--accent); font-weight: 500; text-decoration: none;
-      border-bottom: 1px solid rgba(58,127,193,0.3); transition: border-color 0.2s;
-    }
-    .two-col-section .col p a:hover { border-color: var(--accent); }
-
-    @media (max-width: 620px) {
-      .two-col-section {
-        grid-template-columns: 1fr;
-        gap: 0;
-        padding: 0;
-      }
-      .two-col-section .col {
-        padding: 2rem 1.5rem;
-        border-top: 1px solid var(--border);
-      }
-    }
+    .overview-box p { margin-bottom: 1.4rem; }
+    .overview-box p:last-child { margin-bottom: 0; }
 
     footer { border-top: 1px solid var(--border); text-align: center; padding: 2rem; font-size: 0.8rem; color: var(--light); letter-spacing: 0.04em; }
     @media (max-width: 580px) { nav { padding: 1.2rem 1.5rem; } header { flex-direction: column; padding: 3rem 1.5rem 2rem; } section { padding: 2rem 1.5rem; } }
@@ -161,41 +118,15 @@
 
   <header>
     <img src="magnifier.gif" alt="Rotating magnifying glass" class="page-gif" />
-    <div>
-      <h1>Scientific Research</h1>
-    </div>
   </header>
 
   <div class="divider"></div>
 
-  <!-- Overview in a gray-outlined box with indented numbered list -->
+  <!-- Overview of Scientific Research: heading, then Publications, then elaboration -->
   <section>
-    <h2 class="section-label">Overview</h2>
-    <div class="overview-box">
-      <p>
-        To elaborate on my research interests further: 
-</p>
-      <p>
-        What information do different biophysical signals provide in terms of mechanistic insight into how the brain encodes information? 
-        ... be that blood oxygen fluctuations, local field potential fluctuations, calcium imaging, single unit electrophysiology, etc. 
-      </p>
-        In my understanding, this question underpins any study of cognition --why would one expect a given function to be represented at a certain 
-        scale in the brain? What analytical and physical tools provide relevant information to answer different neuroscientific questions?
-<p>
-        I am interested in brain states (asleep, awake, conscious/unconscious) -- with a current focus on how information from the senses is 
-        varyingly processed across these brain states. How is sensory information flexibly attended based on changing behavioral goals and 
-        brain states? How is this accomplished amidst the brain's energetic constraints and the multiplexing of information shared between 
-        specialized regions? 
-</p>
-  <p>
-  Building off my graduate work studying high-level ventral occipitotemporal cortex, how can cortical regions
-         support specialization (like object-specific processing for faces, words, etc), but also generalizability to adaptively encode 
-        relevant information? 
-</p>
-    </div>
-  </section>
+    <h2 class="section-label">Overview of Scientific Research</h2>
 
-  <div class="subheading">Publications</div>
+    <div class="subheading">Publications</div>
     <div class="social-links">
       <a href="https://orcid.org/0000-0002-4632-1403" target="_blank" rel="noopener" aria-label="ORCID profile">
         <img src="https://orcid.org/sites/default/files/images/orcid_128x128.png" alt="ORCID" />
@@ -211,9 +142,33 @@
       <a href="https://www.brainpost.co/weekly-brainpost/2024/1/30/ydxrrealqyufssbigzo9x6iagrd939?rq=Meredith%20McCarty" target="_blank" rel="noopener">here</a>.
     </p>
 
+    <div class="overview-box">
+      <p>
+        To elaborate on my research interests further:
+      </p>
+      <p>
+        What information do different biophysical signals provide in terms of mechanistic insight into how the brain encodes information?
+        ... be that blood oxygen fluctuations, local field potential fluctuations, calcium imaging, single unit electrophysiology, etc.
+        In my understanding, this question underpins any study of cognition — why would one expect a given function to be represented at a certain
+        scale in the brain? What analytical and physical tools provide relevant information to answer different neuroscientific questions?
+      </p>
+      <p>
+        I am interested in brain states (asleep, awake, conscious/unconscious) — with a current focus on how information from the senses is
+        varyingly processed across these brain states. How is sensory information flexibly attended based on changing behavioral goals and
+        brain states? How is this accomplished amidst the brain's energetic constraints and the multiplexing of information shared between
+        specialized regions?
+      </p>
+      <p>
+        Building off my graduate work studying high-level ventral occipitotemporal cortex, how can cortical regions
+        support specialization (like object-specific processing for faces, words, etc), but also generalizability to adaptively encode
+        relevant information?
+      </p>
+    </div>
+  </section>
+
   <div class="divider"></div>
 
-  <!-- Future Research + Publications, stacked, matching Experimental Research format -->
+  <!-- Future Research -->
   <section>
     <h2 class="section-label">Future Research</h2>
 
@@ -237,8 +192,6 @@
       reaches awareness in conscious and unconscious states. Broadly, I am interested in understanding how emergent network dynamics support
       flexible cognition across brain states, and how cycles of action and perception are indexed at the level of rhythmic network dynamics.
     </p>
-
-    
   </section>
 
   <div class="divider"></div>
