@@ -74,86 +74,41 @@
       opacity: 0; animation: fadeUp 1s ease 0.8s forwards;
     }
 
-    /* ── ROCK GRID ── */
-    .rock-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin-top: 0.5rem;
-    }
-
-    .rock-item {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 28px 8px;
-    }
-
-    .rock-item.label-left  { flex-direction: row; }
-    .rock-item.label-right { flex-direction: row-reverse; }
-    .rock-item.centered    { grid-column: 1 / -1; justify-content: center; }
-    .rock-item.centered .rock-label-wrap { align-items: flex-end; }
-
-    .rock-link { display: block; flex-shrink: 0; text-decoration: none; }
-
-    /* no border-radius, no object-fit — PNG transparency shows naturally */
-    .rock-img {
-      width: 110px;
-      height: auto;
-      cursor: pointer;
-      transition: transform 0.25s ease, filter 0.25s ease;
-      filter: brightness(0.9);
-      display: block;
-    }
-
-    .rock-item:hover .rock-img {
-      transform: scale(1.08);
-      filter: brightness(1.15);
-    }
-
-    /* label + arrow hidden by default, revealed on hover */
-    .rock-label-wrap {
+    /* ── LINK LIST (replaces rock grid) ── */
+    .link-list {
+      list-style: none;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      max-width: 140px;
-      margin: 0 10px;
-      opacity: 0;
-      transform: translateX(-8px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      pointer-events: none;
+      gap: 2rem;
+      margin-top: 0.5rem;
+      padding-left: 0.5rem;
     }
 
-    .rock-item.label-right .rock-label-wrap {
-      align-items: flex-start;
-      transform: translateX(8px);
-    }
-
-    .rock-item.centered .rock-label-wrap {
-      transform: translateX(-8px);
-    }
-
-    .rock-item:hover .rock-label-wrap {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    .rock-label {
+    .site-link {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 12px;
-      font-style: italic;
-      color: rgba(200,216,232,0.75);
-      line-height: 1.45;
-      text-align: right;
-      margin-bottom: 5px;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+      text-decoration: underline;
+      text-decoration-color: rgba(74,184,232,0.45);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 5px;
+      transition: color 0.25s ease, text-decoration-color 0.25s ease;
+    }
+    .site-link:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
     }
 
-    .rock-item.label-right .rock-label { text-align: left; }
-    .rock-item.centered .rock-label    { text-align: right; }
+    .site-desc {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 0.45rem;
+      padding-left: 1.25rem;
+    }
 
-    .connector { display: flex; align-items: center; }
-    .rock-item.label-right .connector { flex-direction: row-reverse; }
-
+    .connector { display: flex; align-items: center; flex-shrink: 0; }
     .arrow-line {
       width: 22px;
       height: 1px;
@@ -165,9 +120,13 @@
       border-bottom: 3px solid transparent;
       border-left: 5px solid rgba(200,216,232,0.35);
     }
-    .arrow-tip-left {
-      border-left: none;
-      border-right: 5px solid rgba(200,216,232,0.35);
+
+    .desc-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: rgba(200,216,232,0.7);
+      line-height: 1.45;
     }
 
     footer { position: relative; z-index: 1; margin-top: auto; padding: 2rem; font-size: 0.78rem; color: rgba(96,112,128,0.5); letter-spacing: 0.04em; }
@@ -176,8 +135,8 @@
       nav { padding: 1.2rem 1.5rem; }
       nav .nav-links { gap: 1rem; }
       main { padding: 3rem 1.5rem; }
-      .rock-img { width: 80px; }
-      .rock-label-wrap { max-width: 110px; }
+      .site-link { font-size: 1.25rem; }
+      .site-desc { padding-left: 0.75rem; }
     }
   </style>
 </head>
@@ -201,109 +160,74 @@
     <p class="subtitle">For being a series of tubes, the internet sure is interesting.</p>
     <p class="subtitle">This is my corner of the internet. A collection of websites I have been enjoying.</p>
     <p class="subtitle">Prone to intermittent updating... </p>
-    
+
     <div class="content">
-      <div class="rock-grid">
+      <ul class="link-list">
 
         <!-- 1 – Brent Wong -->
-        <div class="rock-item label-left">
-          <div class="rock-label-wrap">
-            <div class="rock-label">captures the liminal surreal feeling</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://www.brentwong-painter.com/" target="_blank" rel="noopener">Brent Wong the Painter</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">captures the liminal surreal feeling</span>
           </div>
-          <a class="rock-link" href="https://www.brentwong-painter.com/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock1.png" alt="Brent Wong the Painter" />
-          </a>
-        </div>
+        </li>
 
         <!-- 2 – earth.nullschool -->
-        <div class="rock-item label-right">
-          <div class="rock-label-wrap">
-            <div class="rock-label">incredible earth phenomenon visualizer</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip arrow-tip-left"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://earth.nullschool.net/" target="_blank" rel="noopener">earth.nullschool</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">incredible earth phenomenon visualizer</span>
           </div>
-          <a class="rock-link" href="https://earth.nullschool.net/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock2.png" alt="earth.nullschool" />
-          </a>
-        </div>
+        </li>
 
         <!-- 3 – Ian Fraser -->
-        <div class="rock-item label-left">
-          <div class="rock-label-wrap">
-            <div class="rock-label">a fascinating glimpse into a naturalist's mind</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://ianfrasertalkingnaturally.blogspot.com/" target="_blank" rel="noopener">Ian Fraser, talking naturally</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">a fascinating glimpse into a naturalist's mind</span>
           </div>
-          <a class="rock-link" href="https://ianfrasertalkingnaturally.blogspot.com/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock3.png" alt="Ian Fraser, talking naturally" />
-          </a>
-        </div>
+        </li>
 
         <!-- 4 – Window Swap -->
-        <div class="rock-item label-right">
-          <div class="rock-label-wrap">
-            <div class="rock-label">little glimpses from around the world</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip arrow-tip-left"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://www.window-swap.com/Window" target="_blank" rel="noopener">Window Swap</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">little glimpses from around the world</span>
           </div>
-          <a class="rock-link" href="https://www.window-swap.com/Window" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock4.png" alt="Window Swap" />
-          </a>
-        </div>
+        </li>
 
         <!-- 5 – Atlas Obscura -->
-        <div class="rock-item label-left">
-          <div class="rock-label-wrap">
-            <div class="rock-label">best for off-the-beaten-path discoveries</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://www.atlasobscura.com/" target="_blank" rel="noopener">Atlas Obscura</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">best for off-the-beaten-path discoveries</span>
           </div>
-          <a class="rock-link" href="https://www.atlasobscura.com/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock5.png" alt="Atlas Obscura" />
-          </a>
-        </div>
+        </li>
 
         <!-- 6 – Cloud Hiker -->
-        <div class="rock-item label-right">
-          <div class="rock-label-wrap">
-            <div class="rock-label">explore the internet thematically</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip arrow-tip-left"></div>
-            </div>
+        <li>
+          <a class="site-link" href="https://cloudhiker.net/" target="_blank" rel="noopener">Cloud Hiker</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">explore the internet thematically</span>
           </div>
-          <a class="rock-link" href="https://cloudhiker.net/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock6.png" alt="Cloud Hiker" />
-          </a>
-        </div>
+        </li>
 
-        <!-- 7 – Rotating Sandwiches (centered) -->
-        <div class="rock-item centered">
-          <div class="rock-label-wrap">
-            <div class="rock-label">that's it!</div>
-            <div class="connector">
-              <div class="arrow-line"></div>
-              <div class="arrow-tip"></div>
-            </div>
+        <!-- 7 – Rotating Sandwiches -->
+        <li>
+          <a class="site-link" href="https://rotatingsandwiches.com/" target="_blank" rel="noopener">Rotating Sandwiches</a>
+          <div class="site-desc">
+            <div class="connector"><div class="arrow-line"></div><div class="arrow-tip"></div></div>
+            <span class="desc-text">that's it!</span>
           </div>
-          <a class="rock-link" href="https://rotatingsandwiches.com/" target="_blank" rel="noopener">
-            <img class="rock-img" src="rock7.png" alt="Rotating Sandwiches" />
-          </a>
-        </div>
+        </li>
 
-      </div>
+      </ul>
     </div>
   </main>
 
